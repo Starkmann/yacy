@@ -343,5 +343,24 @@ class Demand extends \TYPO3\CMS\Extbase\DomainObject\AbstractValueObject {
 	public function setPort($port) {
 		$this->port = $port;
 	}
-
+	
+	
+	/*
+	 * No real reason for having this but typo3 needs it in some way
+	 */
+	/**
+	 * Returns the port
+	 *
+	 */
+	public function getUid() {
+	}
+	
+	/**
+	 * Sets the port
+	 *
+	 * @param integer $port
+	 * @return void
+	 */
+	public function setUid($port) {
+	}
 }

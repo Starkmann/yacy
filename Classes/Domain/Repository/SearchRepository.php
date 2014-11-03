@@ -43,6 +43,9 @@ class SearchRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 			/* @var $searchResult \Yacy\Yacy\Domain\Model\SearchResult */
 			$searchResult = $this->objectManager->get('\Yacy\Yacy\Domain\Model\SearchResult');
 			$searchResult->setTitle((string)$item->title);
+			$searchResult->setPubDate((string)$item->pubDate);
+			$searchResult->setDescription((string)$item->description);
+			$searchResult->setLink((string)$item->link);
 			$searchResults->attach($searchResult);
 		}
 		return $searchResults;
@@ -53,7 +56,7 @@ class SearchRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 		return (int)$xml->channel->children("opensearch", true)->totalResults; ;
 	}
 	
-	protected function getXmlFromYacyViaRss($demand){
+	protected function getXmlFromYacyViaRss(\Yacy\Yacy\Domain\Model\Demand $demand){
 		$interfaceName = "yacysearch.rss";
 		
 		//Options that needs to be set.
@@ -61,7 +64,9 @@ class SearchRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 		$url = $url.$interfaceName;
 		$url = $url.'?query='.$demand->getQuery();
 		$url = $url.'&maximumRecords=10';
-
+		if($demand->getStartRecord()){
+			$url = $url.'&startRecord='.$demand->getStartRecord();
+		}
 		return new \SimpleXMLElement($url, $options, TRUE, $ns, $is_prefix);
 		
 	}

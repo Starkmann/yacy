@@ -39,6 +39,20 @@ class SearchController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
 	 * @inject
 	 */
 	protected $searchRepository = NULL;
+	
+	/**
+	 * @return void
+	 */
+	public function initializeSearchAction() {
+		$itemDemandConfiguration = $this->arguments['demand']->getPropertyMappingConfiguration();
+		$itemDemandConfiguration->allowAllProperties();
+		$itemDemandConfiguration
+		->setTypeConverterOption(
+				'TYPO3\CMS\Extbase\Property\TypeConverter\PersistentObjectConverter',
+				\TYPO3\CMS\Extbase\Property\TypeConverter\PersistentObjectConverter::CONFIGURATION_CREATION_ALLOWED,
+				TRUE
+		);
+	}
 
 	/**
 	 * action index
@@ -57,26 +71,35 @@ class SearchController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
 	/**
 	 * Search Action
 	 * @param \Yacy\Yacy\Domain\Model\Demand $demand
+	 * @param integer $page
 	 */
 	public function searchAction(\Yacy\Yacy\Domain\Model\Demand $demand, $page = 1) {
+		$itemsPerPage = 10;
+		
+		$demand->setStartRecord($itemsPerPage * ($page - 1));
 		
 		$results = $this->searchRepository->findDemandedViaYacyRss($demand);
-		$pagination = $this->buildPagination(10,$page,$demand);
+		
+		$pagination = $this->buildPagination($itemsPerPage,$page,$demand);
 		
 		$this->view->assign('pagination', $pagination);
 		$this->view->assign('demand', $demand);
 		$this->view->assign('results', $results);
 	}
 	
+	/**
+	 * 
+	 * @param integer $itemsPerPage
+	 * @param integer $page
+	 * @param \Yacy\Yacy\Domain\Model\Demand $demand
+	 * @return integer
+	 */
 	protected function buildPagination($itemsPerPage = 10, $page = 1 , \Yacy\Yacy\Domain\Model\Demand $demand){
 
 		$resultsCount = $this->searchRepository->countAllRequested($demand);
-		DebuggerUtility::var_dump($resultsCount);
 		if(!$resultsCount <= $itemsPerPage) {
 			//build the pagination
-			//build query for page
-			$queryOffset = $itemsPerPage * ($page - 1);
-			$demand->setStartRecord($queryOffset);
+			
 			//build paginator
 			$pages = ceil($resultsCount / $itemsPerPage);
 			//We limit the pagination menu to 11 pages

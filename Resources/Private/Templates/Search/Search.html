@@ -8,14 +8,13 @@
 		</div>
 	</section>
 <f:if condition="{results}">
-<ul>
+
 <f:for each="{results}" as="result">
-	<li>
-	{result.title} <br>
-	{result.description}
-	</li>
+	<f:link.external uri="{result.link}">{result.title}</f:link.external> <br>
+	<f:link.external uri="{result.link}">{result.link}</f:link.external>
+	<f:format.date format="d.m.Y">{result.pubDate}</f:format.date><br>
+	<f:format.html>{result.description}</f:format.html>
 </f:for>
-</ul>
 </f:if>
 
  <div class="t3begists_paginator">
@@ -23,7 +22,7 @@
 		Seiten:&nbsp;&nbsp;
 		<f:if condition="{pagination.first}">
 			<f:link.action action="search" arguments="{page: pagination.first, demand: demand}" class="paginator-page">
-			|<
+			  "|<"
 			</f:link.action>
 		</f:if>
 		<f:if condition="{pagination.prev}">
