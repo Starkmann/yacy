@@ -1,0 +1,10 @@
+
+<f:form object="{demand}" controller="Search" action="search" name="demand" method="post">
+	<fieldset class="subject">
+		<label for="search"><f:translate key="tx_publications_domain_item.search" /></label>
+		<f:form.textfield id="search" property="query" placeholder="<f:translate key='tx_publications_domain_item.searchPlaceholder' />" />
+		<f:form.hidden property="port"/>
+		<f:form.hidden property="host"/>
+	</fieldset>
+	<button class="submit" title="Suchen">Suchen</button>
+</f:form>

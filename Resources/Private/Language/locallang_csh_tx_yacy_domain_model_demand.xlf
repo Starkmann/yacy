@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+	<file source-language="en" datatype="plaintext" original="messages" date="2014-10-26T17:18:53Z" product-name="yacy">
+		<header/>
+		<body>
+			<trans-unit id="request_url.description">
+				<source>requestUrl</source>
+			</trans-unit>
+			<trans-unit id="host.description">
+				<source>host</source>
+			</trans-unit>
+			<trans-unit id="domain.description">
+				<source>domain</source>
+			</trans-unit>
+			<trans-unit id="query.description">
+				<source>query</source>
+			</trans-unit>
+			<trans-unit id="start_record.description">
+				<source>startRecord</source>
+			</trans-unit>
+			<trans-unit id="maximum_records.description">
+				<source>maximumRecords</source>
+			</trans-unit>
+			<trans-unit id="content_dom.description">
+				<source>contentDom</source>
+			</trans-unit>
+			<trans-unit id="resource.description">
+				<source>resource</source>
+			</trans-unit>
+			<trans-unit id="url_mask_filter.description">
+				<source>urlMaskFilter</source>
+			</trans-unit>
+			<trans-unit id="prefer_mask_filter.description">
+				<source>preferMaskFilter</source>
+			</trans-unit>
+			<trans-unit id="verify.description">
+				<source>verify</source>
+			</trans-unit>
+			<trans-unit id="language.description">
+				<source>language</source>
+			</trans-unit>
+			<trans-unit id="port.description">
+				<source>port</source>
+			</trans-unit>
+		</body>
+	</file>
+</xliff>

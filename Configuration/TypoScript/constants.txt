@@ -1,0 +1,15 @@
+
+plugin.tx_yacy {
+	view {
+		# cat=plugin.tx_yacy/file; type=string; label=Path to template root (FE)
+		templateRootPath = EXT:yacy/Resources/Private/Templates/
+		# cat=plugin.tx_yacy/file; type=string; label=Path to template partials (FE)
+		partialRootPath = EXT:yacy/Resources/Private/Partials/
+		# cat=plugin.tx_yacy/file; type=string; label=Path to template layouts (FE)
+		layoutRootPath = EXT:yacy/Resources/Private/Layouts/
+	}
+	persistence {
+		# cat=plugin.tx_yacy//a; type=string; label=Default storage PID
+		storagePid =
+	}
+}

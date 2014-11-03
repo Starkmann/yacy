@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+	<file source-language="en" datatype="plaintext" original="messages" date="2014-10-26T17:18:53Z" product-name="yacy">
+		<header/>
+		<body>
+			<trans-unit id="link.description">
+				<source>link</source>
+			</trans-unit>
+			<trans-unit id="host.description">
+				<source>host</source>
+			</trans-unit>
+			<trans-unit id="path.description">
+				<source>path</source>
+			</trans-unit>
+			<trans-unit id="file.description">
+				<source>file</source>
+			</trans-unit>
+			<trans-unit id="description.description">
+				<source>description</source>
+			</trans-unit>
+			<trans-unit id="creator.description">
+				<source>creator</source>
+			</trans-unit>
+			<trans-unit id="pub_date.description">
+				<source>pubDate</source>
+			</trans-unit>
+			<trans-unit id="latitude.description">
+				<source>latitude</source>
+			</trans-unit>
+			<trans-unit id="longitude.description">
+				<source>longitude</source>
+			</trans-unit>
+			<trans-unit id="size.description">
+				<source>size</source>
+			</trans-unit>
+			<trans-unit id="title.description">
+				<source>title</source>
+			</trans-unit>
+			<trans-unit id="subject.description">
+				<source>subject</source>
+			</trans-unit>
+			<trans-unit id="guid.description">
+				<source>guid</source>
+			</trans-unit>
+		</body>
+	</file>
+</xliff>
