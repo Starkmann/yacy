@@ -342,4 +342,17 @@ class Tx_Yacy_Domain_Model_Demand extends Tx_Extbase_DomainObject_AbstractValueO
 		$this->port = $port;
 	}
 	
+	
+	/*
+	 * No real reason for having this but typo3 needs it in some way
+	 */
+	
+	/**
+	 * Sets the port
+	 *
+	 * @param integer $port
+	 * @return void
+	 */
+	public function setUid($port) {
+	}
 }
