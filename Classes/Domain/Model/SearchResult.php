@@ -1,6 +1,4 @@
 <?php
-namespace Yacy\Yacy\Domain\Model;
-
 
 /***************************************************************
  *
@@ -30,7 +28,7 @@ namespace Yacy\Yacy\Domain\Model;
 /**
  * A search result
  */
-class SearchResult extends \TYPO3\CMS\Extbase\DomainObject\AbstractValueObject {
+class Tx_Yacy_Domain_Model_SearchResult extends Tx_Extbase_DomainObject_AbstractValueObject {
 
 	/**
 	 * link

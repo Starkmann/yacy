@@ -1,6 +1,5 @@
 <?php
-namespace Yacy\Yacy\Controller;
-use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
+
 /***************************************************************
  *
  *  Copyright notice
@@ -29,29 +28,33 @@ use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 /**
  * SearchController
  */
-class SearchController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController {
+class Tx_Yacy_Controller_SearchController extends Tx_Extbase_MVC_Controller_ActionController {
 
 
 	/**
 	 * searchResultRepository
 	 *
-	 * @var \Yacy\Yacy\Domain\Repository\SearchRepository
+	 * @var Tx_Yacy_Domain_Repository_SearchRepository
 	 * @inject
 	 */
 	protected $searchRepository = NULL;
+	
+	public function injectSearchRepository(Tx_Yacy_Domain_Repository_SearchRepository $searchRepository){
+		$this->searchRepository = $searchRepository;
+	}
 	
 	/**
 	 * @return void
 	 */
 	public function initializeSearchAction() {
-		$itemDemandConfiguration = $this->arguments['demand']->getPropertyMappingConfiguration();
+		/*$itemDemandConfiguration = $this->arguments['demand']->getPropertyMappingConfiguration();
 		$itemDemandConfiguration->allowAllProperties();
 		$itemDemandConfiguration
 		->setTypeConverterOption(
 				'TYPO3\CMS\Extbase\Property\TypeConverter\PersistentObjectConverter',
 				\TYPO3\CMS\Extbase\Property\TypeConverter\PersistentObjectConverter::CONFIGURATION_CREATION_ALLOWED,
 				TRUE
-		);
+		);*/
 	}
 
 	/**
@@ -61,19 +64,19 @@ class SearchController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
 	 */
 	public function indexAction() {
 		/* @var $demand Yacy\Yacy\Domain\Model\Demand */
-		$demand = $this->objectManager->get('Yacy\Yacy\Domain\Model\Demand');
-		$demand->setHost('localhost');
-		$demand->setPort(8090);
+		$demand = $this->objectManager->get('Tx_Yacy_Domain_Model_Demand');
+		$demand->setHost('numinos.de');
+		$demand->setPort(8091);
 		
 		$this->view->assign('demand', $demand);
 	}
 
 	/**
 	 * Search Action
-	 * @param \Yacy\Yacy\Domain\Model\Demand $demand
+	 * @param Tx_Yacy_Domain_Model_Demand $demand
 	 * @param integer $page
 	 */
-	public function searchAction(\Yacy\Yacy\Domain\Model\Demand $demand, $page = 1) {
+	public function searchAction(Tx_Yacy_Domain_Model_Demand $demand, $page = 1) {
 		$itemsPerPage = 10;
 		
 		$demand->setStartRecord($itemsPerPage * ($page - 1));
@@ -91,10 +94,10 @@ class SearchController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
 	 * 
 	 * @param integer $itemsPerPage
 	 * @param integer $page
-	 * @param \Yacy\Yacy\Domain\Model\Demand $demand
+	 * @param Tx_Yacy_Domain_Model_Demand $demand
 	 * @return integer
 	 */
-	protected function buildPagination($itemsPerPage = 10, $page = 1 , \Yacy\Yacy\Domain\Model\Demand $demand){
+	protected function buildPagination($itemsPerPage = 10, $page = 1 , Tx_Yacy_Domain_Model_Demand $demand){
 
 		$resultsCount = $this->searchRepository->countAllRequested($demand);
 		if(!$resultsCount <= $itemsPerPage) {

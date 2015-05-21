@@ -1,6 +1,4 @@
 <?php
-namespace Yacy\Yacy\Domain\Repository;
-use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 /***************************************************************
  *
  *  Copyright notice
@@ -29,19 +27,19 @@ use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 /**
  * The repository for SearchResults
  */
-class SearchRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
+class Tx_Yacy_Domain_Repository_SearchRepository extends Tx_Extbase_Persistence_Repository {
 	
 	
 	
-	public function findDemandedViaYacyRss(\Yacy\Yacy\Domain\Model\Demand $demand, $page = 1){
+	public function findDemandedViaYacyRss(Tx_Yacy_Domain_Model_Demand $demand, $page = 1){
 		$xml = $this->getXmlFromYacyViaRss($demand);	
 		
 		/* @var $searchResults \TYPO3\CMS\Extbase\Persistence\ObjectStorage */
-		$searchResults = $this->objectManager->get('\TYPO3\CMS\Extbase\Persistence\ObjectStorage');
+		$searchResults = $this->objectManager->get('Tx_Extbase_Persistence_ObjectStorage');
 		
 		foreach ($xml->channel->item as $item){
 			/* @var $searchResult \Yacy\Yacy\Domain\Model\SearchResult */
-			$searchResult = $this->objectManager->get('\Yacy\Yacy\Domain\Model\SearchResult');
+			$searchResult = $this->objectManager->get('Tx_Yacy_Domain_Model_SearchResult');
 			$searchResult->setTitle((string)$item->title);
 			$searchResult->setPubDate((string)$item->pubDate);
 			$searchResult->setDescription((string)$item->description);
@@ -51,12 +49,12 @@ class SearchRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 		return $searchResults;
 	}
 	
-	public function countAllRequested(\Yacy\Yacy\Domain\Model\Demand $demand){
+	public function countAllRequested(Tx_Yacy_Domain_Model_Demand $demand){
 		$xml = $this->getXmlFromYacyViaRss($demand);
 		return (int)$xml->channel->children("opensearch", true)->totalResults; ;
 	}
 	
-	protected function getXmlFromYacyViaRss(\Yacy\Yacy\Domain\Model\Demand $demand){
+	protected function getXmlFromYacyViaRss(Tx_Yacy_Domain_Model_Demand $demand){
 		$interfaceName = "yacysearch.rss";
 		
 		//Options that needs to be set.

@@ -3,12 +3,12 @@ if (!defined('TYPO3_MODE')) {
 	die('Access denied.');
 }
 
-\TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
+Tx_Extbase_Utility_Extension::registerPlugin(
 	$_EXTKEY,
 	'Search',
 	'Search'
 );
 
-\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addStaticFile($_EXTKEY, 'Configuration/TypoScript', 'Yacy Search');
+t3lib_extMgm::addStaticFile($_EXTKEY, 'Configuration/TypoScript', 'Yacy Search');
 
 

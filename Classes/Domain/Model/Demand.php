@@ -1,6 +1,4 @@
 <?php
-namespace Yacy\Yacy\Domain\Model;
-
 
 /***************************************************************
  *
@@ -30,7 +28,7 @@ namespace Yacy\Yacy\Domain\Model;
 /**
  * Damand object for yacy search
  */
-class Demand extends \TYPO3\CMS\Extbase\DomainObject\AbstractValueObject {
+class Tx_Yacy_Domain_Model_Demand extends Tx_Extbase_DomainObject_AbstractValueObject {
 
 	/**
 	 * host
@@ -344,23 +342,4 @@ class Demand extends \TYPO3\CMS\Extbase\DomainObject\AbstractValueObject {
 		$this->port = $port;
 	}
 	
-	
-	/*
-	 * No real reason for having this but typo3 needs it in some way
-	 */
-	/**
-	 * Returns the port
-	 *
-	 */
-	public function getUid() {
-	}
-	
-	/**
-	 * Sets the port
-	 *
-	 * @param integer $port
-	 * @return void
-	 */
-	public function setUid($port) {
-	}
 }

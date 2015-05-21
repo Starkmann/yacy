@@ -3,8 +3,8 @@ if (!defined('TYPO3_MODE')) {
 	die('Access denied.');
 }
 
-\TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
-	'Yacy.' . $_EXTKEY,
+Tx_Extbase_Utility_Extension::configurePlugin(
+	$_EXTKEY,
 	'Search',
 	array(
 		'Search' => 'index, search',
