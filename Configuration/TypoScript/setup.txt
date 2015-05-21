@@ -45,5 +45,36 @@ plugin.tx_yacy._CSS_DEFAULT_STYLE (
 	.typo3-messages .message-ok {
 		color:green;
 	}
+	.t3begists {
+    color: #555555;
+    font-family: Verdana,Arial,Helvetica,sans-serif;
+	}
+	
+	.t3begists h2 {
+	    font-size: 14px;
+	    margin: 2px 0 20px;
+	    font-weight: bold;
+	}
+	
+	.t3begists a {
+	    text-decoration: none;
+	}
+	
+	.t3begists_paginator {
+	    margin-bottom: 20px;
+	}
+	
+	.t3begists .paginator-page {
+	    background-color: #ededed;
+	    border: 1px solid #666;
+	    padding: 2px 5px;
+	    font-size: 80%;
+	    margin-left: -1px;
+	}
+	
+	.t3begists .paginator-page.active {
+	    background-color: #dcdcdc;
+	    font-weight: bold;
+	}
 
 )
