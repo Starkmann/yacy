@@ -80,11 +80,14 @@ class SearchController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
 		
 		$results = $this->searchRepository->findDemandedViaYacyRss($demand);
 		
-		$pagination = $this->buildPagination($itemsPerPage,$page,$demand);
+		$resultsCount = $this->searchRepository->countAllRequested($demand);
+		
+		$pagination = $this->buildPagination($itemsPerPage,$page,$demand, $resultsCount);
 		
 		$this->view->assign('pagination', $pagination);
 		$this->view->assign('demand', $demand);
 		$this->view->assign('results', $results);
+		$this->view->assign('resultsCount', $resultsCount);
 	}
 	
 	/**
@@ -92,11 +95,11 @@ class SearchController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
 	 * @param integer $itemsPerPage
 	 * @param integer $page
 	 * @param \Yacy\Yacy\Domain\Model\Demand $demand
+	 * @param integer $resultsCount
 	 * @return integer
 	 */
-	protected function buildPagination($itemsPerPage = 10, $page = 1 , \Yacy\Yacy\Domain\Model\Demand $demand){
+	protected function buildPagination($itemsPerPage = 10, $page = 1 , \Yacy\Yacy\Domain\Model\Demand $demand, $resultsCount){
 
-		$resultsCount = $this->searchRepository->countAllRequested($demand);
 		if(!$resultsCount <= $itemsPerPage) {
 			//build the pagination
 			

@@ -8,6 +8,7 @@
 		</div>
 	</section>
 <f:if condition="{results}">
+{resultsCount} <f:translate key="yacy.resultsCount"> results found</f:translate>
 
 <f:for each="{results}" as="result">
 	<f:link.external uri="{result.link}">{result.title}</f:link.external> <br>
