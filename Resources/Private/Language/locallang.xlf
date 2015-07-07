@@ -87,6 +87,9 @@
 			<trans-unit id="tx_yacy_domain_model_demand.port">
 				<source>Port</source>
 			</trans-unit>
+            <trans-unit id="yacy.resultsCount">
+				<source>Ergebnisse gefunden</source>
+			</trans-unit>
 		</body>
 	</file>
 </xliff>
