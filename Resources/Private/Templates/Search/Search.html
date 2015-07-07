@@ -8,10 +8,12 @@
 		</div>
 	</section>
 <f:if condition="{results}">
-{resultsCount} <f:translate key="yacy.resultsCount"> results found</f:translate>
-
+<div>
+	{resultsCount} <f:translate key="yacy.resultsCount"> results found</f:translate>
+</div>
+<br>
 <f:for each="{results}" as="result">
-	<f:link.external uri="{result.link}">{result.title}</f:link.external> <br>
+	<f:link.external uri="{result.link}"><b>{result.title}</b></f:link.external> <br>
 	<f:link.external uri="{result.link}">{result.link}</f:link.external>
 	<f:format.date format="d.m.Y">{result.pubDate}</f:format.date><br>
 	<f:format.html>{result.description}</f:format.html>
