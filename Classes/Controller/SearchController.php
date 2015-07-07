@@ -102,7 +102,7 @@ class Tx_Yacy_Controller_SearchController extends Tx_Extbase_MVC_Controller_Acti
 	 * @return integer
 	 * @dontverifyrequesthash
 	 */
-	protected function buildPagination($itemsPerPage = 10, $page = 1 , \Yacy\Yacy\Domain\Model\Demand $demand, $resultsCount){
+	protected function buildPagination($itemsPerPage = 10, $page = 1 , Tx_Yacy_Domain_Model_Demand $demand, $resultsCount){
 
 		$resultsCount = $this->searchRepository->countAllRequested($demand);
 		if(!$resultsCount <= $itemsPerPage) {
