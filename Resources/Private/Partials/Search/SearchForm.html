@@ -1,5 +1,5 @@
 
-<f:form object="{demand}" controller="Search" action="search" name="demand" method="post">
+<f:form object="{demand}" controller="Search" action="search" name="demand" method="post" {f:if(condition:demand.resultPage,then:'pageUid="{demand.resultPage}"')}">
 	<fieldset class="subject">
 		<label for="search"><f:translate key="tx_publications_domain_item.search" /></label>
 		<f:form.textfield id="search" property="query" placeholder="<f:translate key='tx_publications_domain_item.searchPlaceholder' />" />

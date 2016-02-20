@@ -113,6 +113,13 @@ class Tx_Yacy_Domain_Model_Demand extends Tx_Extbase_DomainObject_AbstractValueO
 	 * @var integer
 	 */
 	protected $port = 0;
+	
+	/**
+	 * The result page to reffer to
+	 * 
+	 * @var integer
+	 */
+	protected $resultPage = 0;
 
 	/**
 	 * Returns the host
@@ -354,5 +361,21 @@ class Tx_Yacy_Domain_Model_Demand extends Tx_Extbase_DomainObject_AbstractValueO
 	 * @return void
 	 */
 	public function setUid($port) {
+	}
+	
+	/**
+	 * 
+	 * @return integer
+	 */
+	public function getResultPage(){
+		return $this->resultPage;
+	}
+	
+	/**
+	 * 
+	 * @param integer $resultPage
+	 */
+	public function setResultPage($resultPage){
+		$this->restulPage = $resultPage;
 	}
 }

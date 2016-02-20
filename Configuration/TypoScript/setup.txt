@@ -12,6 +12,11 @@ plugin.tx_yacy {
 		# uncomment the following line to enable the new Property Mapper.
 		# rewrittenPropertyMapper = 1
 	}
+	settings {
+		domain = {$plugin.tx_yacy.settings.domain}
+		port = {$plugin.tx_yacy.settings.port}
+		resultPage = {$plugin.tx_yacy.settings.resultPage}
+	}
 }
 
 plugin.tx_yacy._CSS_DEFAULT_STYLE (

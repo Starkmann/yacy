@@ -65,9 +65,13 @@ class Tx_Yacy_Controller_SearchController extends Tx_Extbase_MVC_Controller_Acti
 	public function indexAction() {
 		/* @var $demand Yacy\Yacy\Domain\Model\Demand */
 		$demand = $this->objectManager->get('Tx_Yacy_Domain_Model_Demand');
-		$demand->setHost('numinos.de');
-		$demand->setPort(8091);
-		
+		if($this->settings['domain']&&$this->settings['port']){
+			$demand->setHost($this->settings['domain']);
+			$demand->setPort($this->settings['port']);
+		}
+		if($this->settings['resultPage']){
+			$demand->setResultPage($this->settings['resultPage']);
+		}
 		$this->view->assign('demand', $demand);
 	}
 
