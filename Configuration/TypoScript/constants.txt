@@ -12,4 +12,12 @@ plugin.tx_yacy {
 		# cat=plugin.tx_yacy//a; type=string; label=Default storage PID
 		storagePid =
 	}
+	settings {
+		# cat=plugin.tx_yacy//b; type=string; label=Domain of yacy peer
+		domain = 
+		# cat=plugin.tx_yacy//b; type=string; label=Port of yacy peer
+		port = 
+		# cat=plugin.tx_yacy//b; type=string; label=PID of the result page
+		resultPage = 
+	}
 }
