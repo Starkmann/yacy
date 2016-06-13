@@ -2,6 +2,8 @@
 namespace Yacy\Yacy\Domain\Model;
 
 
+use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
+
 /***************************************************************
  *
  *  Copyright notice
@@ -384,6 +386,6 @@ class Demand extends \TYPO3\CMS\Extbase\DomainObject\AbstractValueObject {
 	 * @param integer $resultPage
 	 */
 	public function setResultPage($resultPage){
-		$this->restulPage = $resultPage;
+		$this->resultPage = $resultPage;
 	}
 }

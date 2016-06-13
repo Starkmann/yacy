@@ -1,10 +1,9 @@
 <f:layout name="Default" />
 
 <f:section name="main">
-	<h1>Yacy Suche</h1>
 	<section class="searchbox clearfix">
 		<div class="searchAndFilter">
-			<f:render partial="Search/SearchForm" arguments="{demand:demand}" />
+			<f:render partial="Search/SearchForm" arguments="{demand:demand}" section="main" />
 		</div>
 	</section>
 <f:if condition="{results}">
