@@ -1,6 +1,7 @@
 <?php
 namespace Yacy\Yacy\Domain\Repository;
 use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 /***************************************************************
  *
  *  Copyright notice
@@ -68,7 +69,7 @@ class SearchRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 			$url = $url.'&startRecord='.$demand->getStartRecord();
 		}
 		return new \SimpleXMLElement($url, $options, TRUE, $ns, $is_prefix);
-		
+	
 	}
 
 	
