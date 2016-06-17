@@ -61,6 +61,7 @@ class SearchController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
 	 */
 	public function indexAction() {
 		/* @var $demand Yacy\Yacy\Domain\Model\Demand */
+
 		$demand = $this->objectManager->get('Yacy\Yacy\Domain\Model\Demand');
 
 		if($this->settings['domain']&&$this->settings['port']){
