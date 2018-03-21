@@ -38,11 +38,11 @@ class SearchRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 		$xml = $this->getXmlFromYacyViaRss($demand);	
 		
 		/* @var $searchResults \TYPO3\CMS\Extbase\Persistence\ObjectStorage */
-		$searchResults = $this->objectManager->get('\TYPO3\CMS\Extbase\Persistence\ObjectStorage');
+		$searchResults = $this->objectManager->get('TYPO3\CMS\Extbase\Persistence\ObjectStorage');
 		
 		foreach ($xml->channel->item as $item){
 			/* @var $searchResult \Yacy\Yacy\Domain\Model\SearchResult */
-			$searchResult = $this->objectManager->get('\Yacy\Yacy\Domain\Model\SearchResult');
+			$searchResult = $this->objectManager->get('Yacy\Yacy\Domain\Model\SearchResult');
 			$searchResult->setTitle((string)$item->title);
 			$searchResult->setPubDate((string)$item->pubDate);
 			$searchResult->setDescription((string)$item->description);
