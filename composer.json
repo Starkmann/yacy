@@ -1,0 +1,20 @@
+{
+	"name": "yacy/yacy",
+	"type": "typo3-cms-extension",
+	"description": "Yacy search integration for typo3",
+	"license": [
+		"GPL-2.0+"
+	],
+	"support": {
+		"issues": "https://github.com/Starkmann/yacy/issues"
+	},
+	"require": {
+		"typo3/cms": "6.2 - 8.7.99",
+		"php": ">= 5.6 < 7.2"
+	},
+	"autoload": {
+		"psr-4": {
+			"Undkonsorten\\BlockShared\\": "Classes"
+		}
+	}
+}
