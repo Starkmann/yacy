@@ -68,7 +68,7 @@ class Demand extends \TYPO3\CMS\Extbase\DomainObject\AbstractValueObject
      *
      * @var int
      */
-    protected $maximumRecords = 0;
+    protected $maximumRecords = 10;
 
     /**
      * contentDom
@@ -427,7 +427,14 @@ class Demand extends \TYPO3\CMS\Extbase\DomainObject\AbstractValueObject
             ':' .
             $this->getPort() .
             '/' .
-            $this->getInterface();
+            $this->getInterface() .
+            '?query=' .
+            $this->getQuery() .
+            '&maximumRecords=' .
+            $this->getMaximumRecords() .
+            '&startRecord=' .
+            $this->getStartRecord();
+
         return $url;
     }
 }

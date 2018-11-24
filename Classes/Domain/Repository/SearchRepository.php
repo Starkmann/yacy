@@ -47,13 +47,19 @@ class SearchRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
 
     public function countAllRequested(\Eike\Yacy\Domain\Model\Demand $demand)
     {
-        $xml = $this->getXmlFromYacyViaRss($demand);
-        return (int)$xml->channel->children('opensearch', true)->totalResults;
+        if ($demand->getInterface() === 'yacysearch.rss') {
+            $xml = new \SimpleXMLElement($demand->getRequestUrl(), 1, true);
+            return (int)$xml->channel->children('opensearch', true)->totalResults;
+        }
+        if ($demand->getInterface() === 'yacysearch.json') {
+            $json = json_decode(file_get_contents($demand->getRequestUrl()), true);
+            return (int)$json['channels'][0]['totalResults'];
+        }
     }
 
     protected function findDemandedViaYacyRss(\Eike\Yacy\Domain\Model\Demand $demand, $page = 1)
     {
-        $xml = $this->getXmlFromYacyViaRss($demand);
+        $xml = new \SimpleXMLElement($demand->getRequestUrl(), 1, true);
 
         /* @var $searchResults \TYPO3\CMS\Extbase\Persistence\ObjectStorage */
         $searchResults = $this->objectManager->get(ObjectStorage::class);
@@ -70,18 +76,22 @@ class SearchRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
         return $searchResults;
     }
 
-    protected function getXmlFromYacyViaRss(\Eike\Yacy\Domain\Model\Demand $demand)
+    protected function findDemandedViaYacyJson(Demand $demand, $page =1)
     {
-        $query = $demand->getRequestUrl();
-        $query .= '?query=' . $demand->getQuery();
-        $query .= '&maximumRecords=10';
-        if ($demand->getStartRecord()) {
-            $query = $query . '&startRecord=' . $demand->getStartRecord();
-        }
-        return new \SimpleXMLElement($query, 1, true);
-    }
+        $json = json_decode(file_get_contents($demand->getRequestUrl()), true);
 
-    protected function findDemandedViaYacyJson(Demand $demand, $page)
-    {
+        /* @var $searchResults \TYPO3\CMS\Extbase\Persistence\ObjectStorage */
+        $searchResults = $this->objectManager->get(ObjectStorage::class);
+
+        foreach ($json['channels'][0]['items'] as $item) {
+            /* @var $searchResult \Eike\Yacy\Domain\Model\SearchResult */
+            $searchResult = $this->objectManager->get(SearchResult::class);
+            $searchResult->setTitle((string)$item['title']);
+            $searchResult->setPubDate((string)$item['pubDate']);
+            $searchResult->setDescription((string)$item['description']);
+            $searchResult->setLink((string)$item['link']);
+            $searchResults->attach($searchResult);
+        }
+        return $searchResults;
     }
 }
