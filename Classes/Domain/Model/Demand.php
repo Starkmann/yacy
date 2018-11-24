@@ -8,7 +8,7 @@ use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
  *
  *  Copyright notice
  *
- *  (c) 2018 Eike Starkmann <eike.starkmann@posteo.de>
+ *  (c) 2014 Eike Starkmann <eikestarkmann@web.de>
  *
  *  All rights reserved
  *
@@ -34,12 +34,16 @@ use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
  */
 class Demand extends \TYPO3\CMS\Extbase\DomainObject\AbstractValueObject {
 
-	/**
-	 * host
-	 *
-	 * @var string
-	 */
-	protected $host = '';
+    /**
+     * @var string
+     */
+    protected $protocol = 'http';
+
+    /**
+     * @var string
+     */
+    protected $interface = 'yacysearch.rss';
+
 
 	/**
 	 * domain
@@ -125,24 +129,6 @@ class Demand extends \TYPO3\CMS\Extbase\DomainObject\AbstractValueObject {
 	 */
 	protected $resultPage = 0;
 
-	/**
-	 * Returns the host
-	 *
-	 * @return string $host
-	 */
-	public function getHost() {
-		return $this->host;
-	}
-
-	/**
-	 * Sets the host
-	 *
-	 * @param string $host
-	 * @return void
-	 */
-	public function setHost($host) {
-		$this->host = $host;
-	}
 
 	/**
 	 * Returns the domain
@@ -388,4 +374,56 @@ class Demand extends \TYPO3\CMS\Extbase\DomainObject\AbstractValueObject {
 	public function setResultPage($resultPage){
 		$this->resultPage = $resultPage;
 	}
+
+    /**
+     * @return string
+     */
+    public function getProtocol(): string
+    {
+        return $this->protocol;
+    }
+
+    /**
+     * @param string $protocol
+     */
+    public function setProtocol(string $protocol)
+    {
+        $this->protocol = $protocol;
+    }
+
+    /**
+     * @return string
+     */
+    public function getInterface(): string
+    {
+        return $this->interface;
+    }
+
+    /**
+     * @param string $interface
+     */
+    public function setInterface(string $interface)
+    {
+        $this->interface = $interface;
+    }
+
+
+    /**
+     * Builds the request url
+     *
+     * @return string
+     */
+	public function getRequestUrl()
+    {
+        $url =
+            $this->getProtocol().
+            '://'.
+            $this->getDomain().
+            ':'.
+            $this->getPort().
+            '/'.
+            $this->getInterface();
+        return $url;
+    }
 }
+

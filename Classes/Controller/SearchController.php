@@ -1,5 +1,6 @@
 <?php
 namespace Eike\Yacy\Controller;
+use Eike\Yacy\Domain\Model\Demand;
 use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 /***************************************************************
  *
@@ -60,13 +61,15 @@ class SearchController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
 	 * @return void
 	 */
 	public function indexAction() {
-		/* @var $demand Eike\Yacy\Domain\Model\Demand */
+		/* @var $demand \Eike\Yacy\Domain\Model\Demand */
 
 		$demand = $this->objectManager->get('Eike\Yacy\Domain\Model\Demand');
 
 		if($this->settings['domain']&&$this->settings['port']){
-			$demand->setHost($this->settings['domain']);
+			$demand->setDomain($this->settings['domain']);
 			$demand->setPort($this->settings['port']);
+			$demand->setInterface($this->settings['interface']);
+			$demand->setProtocol($this->settings['protocol']);
 		}
 		if($this->settings['resultPage']){
 			$demand->setResultPage($this->settings['resultPage']);
@@ -79,12 +82,12 @@ class SearchController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
 	 * @param \Eike\Yacy\Domain\Model\Demand $demand
 	 * @param integer $page
 	 */
-	public function searchAction(\Eike\Yacy\Domain\Model\Demand $demand, $page = 1) {
+	public function searchAction(Demand $demand, $page = 1) {
 		$itemsPerPage = 10;
 
 		$demand->setStartRecord($itemsPerPage * ($page - 1));
 
-		$results = $this->searchRepository->findDemandedViaYacyRss($demand);
+		$results = $this->searchRepository->findDemanded($demand);
 
 		$resultsCount = $this->searchRepository->countAllRequested($demand);
 
@@ -156,3 +159,4 @@ class SearchController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
 
 
 }
+

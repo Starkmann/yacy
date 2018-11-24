@@ -13,11 +13,15 @@ plugin.tx_yacy {
 		storagePid =
 	}
 	settings {
+	    # cat=plugin.tx_yacy//a; type=string; label=Protocoll (http/https)
+    	protocol = http
 		# cat=plugin.tx_yacy//b; type=string; label=Domain of yacy peer
-		domain = 
-		# cat=plugin.tx_yacy//b; type=string; label=Port of yacy peer
-		port = 
-		# cat=plugin.tx_yacy//b; type=string; label=PID of the result page
-		resultPage = 
+		domain =
+		# cat=plugin.tx_yacy//c; type=string; label=Port of yacy peer
+		port =
+		# cat=plugin.tx_yacy//d; type=string; label=Choose one if yacy's interfaces
+        interface = yacysearch.rss
+		# cat=plugin.tx_yacy//e; type=string; label=PID of the result page
+		resultPage =
 	}
 }
