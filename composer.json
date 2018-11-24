@@ -1,0 +1,24 @@
+{
+	"name": "eike/yacy",
+	"type": "typo3-cms-extension",
+	"description": "Integrate yacy",
+	"license": [
+		"GPL-2.0+"
+	],
+	"keywords": [
+		"integration",
+		"yacy",
+		"search"
+	],
+	"require": {
+		"typo3/cms": "^8.7"
+	},
+	"replace": {
+		"yacy": "self.version"
+	},
+	"autoload": {
+		"psr-4": {
+			"Eike\\Yacy\\": "Classes"
+		}
+	}
+}

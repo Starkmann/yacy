@@ -1,10 +1,10 @@
 <?php
-namespace Yacy\Yacy\Tests\Unit\Controller;
+namespace Eike\Yacy\Tests\Unit\Controller;
 /***************************************************************
  *  Copyright notice
  *
- *  (c) 2014 Eike Starkmann <eikestarkmann@web.de>
- *  			
+ *  (c) 2018 Eike Starkmann <eike.starkmann@posteo.de>
+ *
  *  All rights reserved
  *
  *  This script is part of the TYPO3 project. The TYPO3 project is
@@ -25,19 +25,19 @@ namespace Yacy\Yacy\Tests\Unit\Controller;
  ***************************************************************/
 
 /**
- * Test case for class Yacy\Yacy\Controller\SearchResultController.
+ * Test case for class Eike\Yacy\Controller\SearchResultController.
  *
- * @author Eike Starkmann <eikestarkmann@web.de>
+ * @author Eike Starkmann <eike.starkmann@posteo.de>
  */
 class SearchResultControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 
 	/**
-	 * @var \Yacy\Yacy\Controller\SearchResultController
+	 * @var \Eike\Yacy\Controller\SearchResultController
 	 */
 	protected $subject = NULL;
 
 	protected function setUp() {
-		$this->subject = $this->getMock('Yacy\\Yacy\\Controller\\SearchResultController', array('redirect', 'forward', 'addFlashMessage'), array(), '', FALSE);
+		$this->subject = $this->getMock('Eike\\Yacy\\Controller\\SearchResultController', array('redirect', 'forward', 'addFlashMessage'), array(), '', FALSE);
 	}
 
 	protected function tearDown() {

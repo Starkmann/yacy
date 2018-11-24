@@ -1,12 +1,12 @@
 <?php
-namespace Yacy\Yacy\Domain\Model;
+namespace Eike\Yacy\Domain\Model;
 
 
 /***************************************************************
  *
  *  Copyright notice
  *
- *  (c) 2014 Eike Starkmann <eikestarkmann@web.de>
+ *  (c) 2018 Eike Starkmann <eike.starkmann@posteo.de>
  *
  *  All rights reserved
  *

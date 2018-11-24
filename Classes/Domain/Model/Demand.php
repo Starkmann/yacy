@@ -1,5 +1,5 @@
 <?php
-namespace Yacy\Yacy\Domain\Model;
+namespace Eike\Yacy\Domain\Model;
 
 
 use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
@@ -8,7 +8,7 @@ use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
  *
  *  Copyright notice
  *
- *  (c) 2014 Eike Starkmann <eikestarkmann@web.de>
+ *  (c) 2018 Eike Starkmann <eike.starkmann@posteo.de>
  *
  *  All rights reserved
  *
@@ -117,10 +117,10 @@ class Demand extends \TYPO3\CMS\Extbase\DomainObject\AbstractValueObject {
 	 * @var integer
 	 */
 	protected $port = 0;
-	
+
 	/**
 	 * The result page to reffer to
-	 * 
+	 *
 	 * @var integer
 	 */
 	protected $resultPage = 0;
@@ -352,8 +352,8 @@ class Demand extends \TYPO3\CMS\Extbase\DomainObject\AbstractValueObject {
 	public function setPort($port) {
 		$this->port = $port;
 	}
-	
-	
+
+
 	/*
 	 * No real reason for having this but typo3 needs it in some way
 	 */
@@ -363,7 +363,7 @@ class Demand extends \TYPO3\CMS\Extbase\DomainObject\AbstractValueObject {
 	 */
 	public function getUid() {
 	}
-	
+
 	/**
 	 * Sets the port
 	 *
@@ -372,17 +372,17 @@ class Demand extends \TYPO3\CMS\Extbase\DomainObject\AbstractValueObject {
 	 */
 	public function setUid($port) {
 	}
-	
+
 	/**
-	 * 
+	 *
 	 * @return integer
 	 */
 	public function getResultPage(){
 		return $this->resultPage;
 	}
-	
+
 	/**
-	 * 
+	 *
 	 * @param integer $resultPage
 	 */
 	public function setResultPage($resultPage){

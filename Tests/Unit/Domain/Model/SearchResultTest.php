@@ -1,11 +1,11 @@
 <?php
 
-namespace Yacy\Yacy\Tests\Unit\Domain\Model;
+namespace Eike\Yacy\Tests\Unit\Domain\Model;
 
 /***************************************************************
  *  Copyright notice
  *
- *  (c) 2014 Eike Starkmann <eikestarkmann@web.de>
+ *  (c) 2018 Eike Starkmann <eike.starkmann@posteo.de>
  *
  *  All rights reserved
  *
@@ -27,21 +27,21 @@ namespace Yacy\Yacy\Tests\Unit\Domain\Model;
  ***************************************************************/
 
 /**
- * Test case for class \Yacy\Yacy\Domain\Model\SearchResult.
+ * Test case for class \Eike\Yacy\Domain\Model\SearchResult.
  *
  * @copyright Copyright belongs to the respective authors
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  *
- * @author Eike Starkmann <eikestarkmann@web.de>
+ * @author Eike Starkmann <eike.starkmann@posteo.de>
  */
 class SearchResultTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 	/**
-	 * @var \Yacy\Yacy\Domain\Model\SearchResult
+	 * @var \Eike\Yacy\Domain\Model\SearchResult
 	 */
 	protected $subject = NULL;
 
 	protected function setUp() {
-		$this->subject = new \Yacy\Yacy\Domain\Model\SearchResult();
+		$this->subject = new \Eike\Yacy\Domain\Model\SearchResult();
 	}
 
 	protected function tearDown() {

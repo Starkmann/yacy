@@ -1,11 +1,11 @@
 <?php
-namespace Yacy\Yacy\Controller;
+namespace Eike\Yacy\Controller;
 use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 /***************************************************************
  *
  *  Copyright notice
  *
- *  (c) 2014 Eike Starkmann <eikestarkmann@web.de>
+ *  (c) 2018 Eike Starkmann <eike.starkmann@posteo.de>
  *
  *  All rights reserved
  *
@@ -35,11 +35,11 @@ class SearchController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
 	/**
 	 * searchResultRepository
 	 *
-	 * @var \Yacy\Yacy\Domain\Repository\SearchRepository
+	 * @var \Eike\Yacy\Domain\Repository\SearchRepository
 	 * @inject
 	 */
 	protected $searchRepository = NULL;
-	
+
 	/**
 	 * @return void
 	 */
@@ -60,10 +60,10 @@ class SearchController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
 	 * @return void
 	 */
 	public function indexAction() {
-		/* @var $demand Yacy\Yacy\Domain\Model\Demand */
+		/* @var $demand Eike\Yacy\Domain\Model\Demand */
 
-		$demand = $this->objectManager->get('Yacy\Yacy\Domain\Model\Demand');
-	
+		$demand = $this->objectManager->get('Eike\Yacy\Domain\Model\Demand');
+
 		if($this->settings['domain']&&$this->settings['port']){
 			$demand->setHost($this->settings['domain']);
 			$demand->setPort($this->settings['port']);
@@ -76,39 +76,39 @@ class SearchController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
 
 	/**
 	 * Search Action
-	 * @param \Yacy\Yacy\Domain\Model\Demand $demand
+	 * @param \Eike\Yacy\Domain\Model\Demand $demand
 	 * @param integer $page
 	 */
-	public function searchAction(\Yacy\Yacy\Domain\Model\Demand $demand, $page = 1) {
+	public function searchAction(\Eike\Yacy\Domain\Model\Demand $demand, $page = 1) {
 		$itemsPerPage = 10;
-		
+
 		$demand->setStartRecord($itemsPerPage * ($page - 1));
-		
+
 		$results = $this->searchRepository->findDemandedViaYacyRss($demand);
-		
+
 		$resultsCount = $this->searchRepository->countAllRequested($demand);
-		
+
 		$pagination = $this->buildPagination($itemsPerPage,$page,$demand, $resultsCount);
-		
+
 		$this->view->assign('pagination', $pagination);
 		$this->view->assign('demand', $demand);
 		$this->view->assign('results', $results);
 		$this->view->assign('resultsCount', $resultsCount);
 	}
-	
+
 	/**
-	 * 
+	 *
 	 * @param integer $itemsPerPage
 	 * @param integer $page
-	 * @param \Yacy\Yacy\Domain\Model\Demand $demand
+	 * @param \Eike\Yacy\Domain\Model\Demand $demand
 	 * @param integer $resultsCount
 	 * @return integer
 	 */
-	protected function buildPagination($itemsPerPage = 10, $page = 1 , \Yacy\Yacy\Domain\Model\Demand $demand, $resultsCount){
+	protected function buildPagination($itemsPerPage = 10, $page = 1 , \Eike\Yacy\Domain\Model\Demand $demand, $resultsCount){
 
 		if(!$resultsCount <= $itemsPerPage) {
 			//build the pagination
-			
+
 			//build paginator
 			$pages = ceil($resultsCount / $itemsPerPage);
 			//We limit the pagination menu to 11 pages
@@ -150,9 +150,9 @@ class SearchController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
 		}
 		//write the actual page for css
 		$pagination['current'] = $page;
-	
+
 		return $pagination;
 	}
-	
+
 
 }

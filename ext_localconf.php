@@ -4,15 +4,15 @@ if (!defined('TYPO3_MODE')) {
 }
 
 \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
-	'Yacy.' . $_EXTKEY,
+	'Eike.' . $_EXTKEY,
 	'Search',
 	array(
 		'Search' => 'index, search',
-		
+
 	),
 	// non-cacheable actions
 	array(
 		'Search' => 'search',
-		
+
 	)
 );
