@@ -1,5 +1,7 @@
 <?php
 namespace Eike\Yacy\Domain\Repository;
+use Eike\Yacy\Domain\Model\SearchResult;
+use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 /***************************************************************
@@ -38,11 +40,11 @@ class SearchRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 		$xml = $this->getXmlFromYacyViaRss($demand);
 
 		/* @var $searchResults \TYPO3\CMS\Extbase\Persistence\ObjectStorage */
-		$searchResults = $this->objectManager->get('\TYPO3\CMS\Extbase\Persistence\ObjectStorage');
+		$searchResults = $this->objectManager->get(ObjectStorage::class);
 
 		foreach ($xml->channel->item as $item){
 			/* @var $searchResult \Eike\Yacy\Domain\Model\SearchResult */
-			$searchResult = $this->objectManager->get('\Eike\Yacy\Domain\Model\SearchResult');
+			$searchResult = $this->objectManager->get(SearchResult::class);
 			$searchResult->setTitle((string)$item->title);
 			$searchResult->setPubDate((string)$item->pubDate);
 			$searchResult->setDescription((string)$item->description);
