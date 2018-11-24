@@ -1,5 +1,6 @@
 <?php
 namespace Eike\Yacy\Tests\Unit\Controller;
+
 /***************************************************************
  *  Copyright notice
  *
@@ -29,19 +30,21 @@ namespace Eike\Yacy\Tests\Unit\Controller;
  *
  * @author Eike Starkmann <eike.starkmann@posteo.de>
  */
-class SearchResultControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
+class SearchResultControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
+{
 
-	/**
-	 * @var \Eike\Yacy\Controller\SearchResultController
-	 */
-	protected $subject = NULL;
+    /**
+     * @var \Eike\Yacy\Controller\SearchResultController
+     */
+    protected $subject = null;
 
-	protected function setUp() {
-		$this->subject = $this->getMock('Eike\\Yacy\\Controller\\SearchResultController', array('redirect', 'forward', 'addFlashMessage'), array(), '', FALSE);
-	}
+    protected function setUp()
+    {
+        $this->subject = $this->getMock('Eike\\Yacy\\Controller\\SearchResultController', ['redirect', 'forward', 'addFlashMessage'], [], '', false);
+    }
 
-	protected function tearDown() {
-		unset($this->subject);
-	}
-
+    protected function tearDown()
+    {
+        unset($this->subject);
+    }
 }

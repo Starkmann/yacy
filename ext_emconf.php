@@ -10,25 +10,25 @@
  * "version" and "dependencies" must not be touched!
  ***************************************************************/
 
-$EM_CONF[$_EXTKEY] = array(
-	'title' => 'Yacy Search',
-	'description' => 'Add a yacy search to you website.',
-	'category' => 'plugin',
-	'author' => 'Eike Starkmann',
-	'author_email' => 'eikestarkmann@posteo.de',
-	'state' => 'alpha',
-	'internal' => '',
-	'uploadfolder' => '0',
-	'createDirs' => '',
-	'clearCacheOnLoad' => 0,
-	'version' => '0.0.1',
-	'constraints' => array(
-		'depends' => array(
-			'typo3' => '6.2',
-		),
-		'conflicts' => array(
-		),
-		'suggests' => array(
-		),
-	),
-);
+$EM_CONF[$_EXTKEY] = [
+    'title' => 'Yacy Search',
+    'description' => 'Add a yacy search to you website.',
+    'category' => 'plugin',
+    'author' => 'Eike Starkmann',
+    'author_email' => 'eikestarkmann@posteo.de',
+    'state' => 'alpha',
+    'internal' => '',
+    'uploadfolder' => '0',
+    'createDirs' => '',
+    'clearCacheOnLoad' => 0,
+    'version' => '0.0.1',
+    'constraints' => [
+        'depends' => [
+            'typo3' => '6.2',
+        ],
+        'conflicts' => [
+        ],
+        'suggests' => [
+        ],
+    ],
+];

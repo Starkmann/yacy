@@ -15,6 +15,8 @@ plugin.tx_yacy {
 	settings {
 		domain = {$plugin.tx_yacy.settings.domain}
 		port = {$plugin.tx_yacy.settings.port}
+		protocol = {$plugin.tx_yacy.settings.protocol}
+		interface = {$plugin.tx_yacy.settings.interface}
 		resultPage = {$plugin.tx_yacy.settings.resultPage}
 	}
 }
@@ -54,21 +56,21 @@ plugin.tx_yacy._CSS_DEFAULT_STYLE (
     color: #555555;
     font-family: Verdana,Arial,Helvetica,sans-serif;
 	}
-	
+
 	.t3begists h2 {
 	    font-size: 14px;
 	    margin: 2px 0 20px;
 	    font-weight: bold;
 	}
-	
+
 	.t3begists a {
 	    text-decoration: none;
 	}
-	
+
 	.t3begists_paginator {
 	    margin-bottom: 20px;
 	}
-	
+
 	.t3begists .paginator-page {
 	    background-color: #ededed;
 	    border: 1px solid #666;
@@ -76,7 +78,7 @@ plugin.tx_yacy._CSS_DEFAULT_STYLE (
 	    font-size: 80%;
 	    margin-left: -1px;
 	}
-	
+
 	.t3begists .paginator-page.active {
 	    background-color: #dcdcdc;
 	    font-weight: bold;
