@@ -2,6 +2,7 @@
 namespace Eike\Yacy\Controller;
 
 use Eike\Yacy\Domain\Model\Demand;
+use Eike\Yacy\Factory\SearchRepositoryFactory;
 
 /***************************************************************
  *
@@ -37,8 +38,8 @@ class SearchController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
     /**
      * searchResultRepository
      *
-     * @var \Eike\Yacy\Domain\Repository\SearchRepository
-     * @inject
+     * @var \Eike\Yacy\Domain\Repository\SearchRepositoryInterface
+     *
      */
     protected $searchRepository = null;
 
@@ -84,6 +85,10 @@ class SearchController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
      */
     public function searchAction(Demand $demand, $page = 1)
     {
+        /** @var SearchRepositoryFactory $searchRepositoryFactory */
+        $searchRepositoryFactory = $this->objectManager->get(SearchRepositoryFactory::class);
+        $this->searchRepository = $searchRepositoryFactory->createSearchRepository($demand->getInterface());
+
         $demand->setMaximumRecords($this->settings['itemsPerPage']);
 
         $demand->setStartRecord($demand->getMaximumRecords() * ($page - 1));
@@ -92,22 +97,24 @@ class SearchController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
             $demand->setQuery($demand->getQuery().'+collection'.':'.$this->settings['collection']);
         }
 
-        $results = $this->searchRepository->findDemanded($demand);
+        $result = $this->searchRepository->findDemanded($demand);
 
-        $resultsCount = $this->searchRepository->countAllRequested($demand);
 
-        $pagination = $this->buildPagination($demand->getMaximumRecords(), $page, $resultsCount);
+        $pagination = $this->buildPagination($demand->getMaximumRecords(), $page, $result['totalResults']);
 
         /** @var \TYPO3\CMS\Extensionmanager\Utility\ConfigurationUtility $configurationUtility */
         $configurationUtility = $this->objectManager->get('TYPO3\CMS\Extensionmanager\Utility\ConfigurationUtility');
         $extensionConfiguration = $configurationUtility->getCurrentConfiguration('yacy');
         if($extensionConfiguration['debug']['value'] === '1'){
             $this->view->assign('query', $demand->getRequestUrl());
+            #DebuggerUtility::var_dump($demand,'Demand');
+            #DebuggerUtility::var_dump($result,'Result');
         }
         $this->view->assign('pagination', $pagination);
         $this->view->assign('demand', $demand);
-        $this->view->assign('results', $results);
-        $this->view->assign('resultsCount', $resultsCount);
+        $this->view->assign('results', $result['items']);
+        $this->view->assign('resultsCount', $result['totalResults']);
+        $this->view->assign('navigation', $result['navigation']);
     }
 
     /**

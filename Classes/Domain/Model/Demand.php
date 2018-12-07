@@ -434,6 +434,9 @@ class Demand extends \TYPO3\CMS\Extbase\DomainObject\AbstractValueObject
             $this->getMaximumRecords() .
             '&startRecord=' .
             $this->getStartRecord();
+        if($this->contentDom !== ''){
+            $url .= '&contentdom='.$this->contentDom;
+        }
 
         return $url;
     }

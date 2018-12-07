@@ -20,6 +20,9 @@ plugin.tx_yacy {
 		resultPage = {$plugin.tx_yacy.settings.resultPage}
 		collection = {$plugin.tx_yacy.settings.collection}
 		itemsPerPage = {$plugin.tx_yacy.settings.itemsPerPage}
+		filter = {$plugin.tx_yacy.settings.filter}
+		advancedSettings = {$plugin.tx_yacy.settings.advancedSettings}
+		}
 	}
 }
 

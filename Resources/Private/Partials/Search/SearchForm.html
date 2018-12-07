@@ -22,6 +22,12 @@
 			<f:form.hidden property="domain"/>
 			<f:form.hidden property="protocol"/>
 			<f:form.hidden property="interface"/>
+			<f:if condition="{settings.filter}">
+				<label for="image"><f:translate key="tx_yacy_domain_model_searchresult.image" /></label>
+				<f:form.radio property="contentDom" value="image" id="image"/>
+				<label for="text"><f:translate key="tx_yacy_domain_model_searchresult.text" /></label>
+				<f:form.radio property="contentDom" value="text" id="text"/>
+			</f:if>
 			<f:form.submit value="{f:translate(key: 'tx_yacy_domain_model_searchresult.submit')}" class="button"/>
 	</fieldset>
 

@@ -4,7 +4,7 @@
 <f:section name="main">
 	<section class="searchbox clearfix">
 		<div class="searchAndFilter">
-			<f:render partial="Search/SearchForm" arguments="{demand:demand}" section="main" />
+			<f:render partial="Search/SearchForm" arguments="{demand:demand, settings:settings}" section="main" />
 		</div>
 	</section>
 	<f:if condition="{query}">
@@ -17,10 +17,26 @@
 <br>
 
 <f:for each="{results}" as="result">
-	<f:link.external uri="{result.link}"><b>{result.title}</b></f:link.external> <br>
-	<f:link.external uri="{result.link}">{result.link}</f:link.external>
-	<f:format.date format="d.m.Y">{result.pubDate}</f:format.date><br>
-	<f:format.html>{result.description}</f:format.html>
+	<f:if condition="{demand.contentDom} == image">
+		<f:then>
+			yyy
+			<f:if condition="{result.url}">
+				<f:link.external uri="{result.url}"><img src="{result.image}" alt="{result.title}"> {result.title}</f:link.external>
+			</f:if>
+			<f:if condition="{result.link}">
+				<f:link.external uri="{result.link}"><img src="{result.image}" alt="{result.title}"> {result.title}</f:link.external>
+			</f:if>
+
+		</f:then>
+		<f:else>
+			<f:link.external uri="{result.link}"><b>{result.title}</b></f:link.external> <br>
+			<f:link.external uri="{result.link}">{result.link}</f:link.external>
+			<f:format.date format="d.m.Y">{result.pubDate}</f:format.date><br>
+			<f:format.html>{result.description}</f:format.html>
+		</f:else>
+	</f:if>
+
+
 </f:for>
 </f:if>
 
@@ -29,7 +45,7 @@
 		Seiten:&nbsp;&nbsp;
 		<f:if condition="{pagination.first}">
 			<f:link.action action="search" arguments="{page: pagination.first, demand: demand}" class="paginator-page">
-			  "|<"
+			  |<
 			</f:link.action>
 		</f:if>
 		<f:if condition="{pagination.prev}">

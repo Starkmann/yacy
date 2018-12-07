@@ -45,6 +45,12 @@
 			<trans-unit id="tx_yacy_domain_model_searchresult.submit">
             	<source>Submit</source>
             </trans-unit>
+            <trans-unit id="tx_yacy_domain_model_searchresult.image">
+            	<source>Image</source>
+            </trans-unit>
+             <trans-unit id="tx_yacy_domain_model_searchresult.text">
+				<source>Text</source>
+			</trans-unit>
 			<trans-unit id="tx_yacy_domain_model_searchresult.guid">
 				<source>Guid</source>
 			</trans-unit>
