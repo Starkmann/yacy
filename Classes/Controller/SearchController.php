@@ -39,7 +39,6 @@ class SearchController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
      * searchResultRepository
      *
      * @var \Eike\Yacy\Domain\Repository\SearchRepositoryInterface
-     *
      */
     protected $searchRepository = null;
 
@@ -93,22 +92,21 @@ class SearchController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
 
         $demand->setStartRecord($demand->getMaximumRecords() * ($page - 1));
 
-        if($this->settings['collection'] !== '' && strpos($demand->getQuery(),'collection') === false) {
-            $demand->setQuery($demand->getQuery().'+collection'.':'.$this->settings['collection']);
+        if ($this->settings['collection'] !== '' && strpos($demand->getQuery(), 'collection') === false) {
+            $demand->setQuery($demand->getQuery() . '+collection' . ':' . $this->settings['collection']);
         }
 
         $result = $this->searchRepository->findDemanded($demand);
-
 
         $pagination = $this->buildPagination($demand->getMaximumRecords(), $page, $result['totalResults']);
 
         /** @var \TYPO3\CMS\Extensionmanager\Utility\ConfigurationUtility $configurationUtility */
         $configurationUtility = $this->objectManager->get('TYPO3\CMS\Extensionmanager\Utility\ConfigurationUtility');
         $extensionConfiguration = $configurationUtility->getCurrentConfiguration('yacy');
-        if($extensionConfiguration['debug']['value'] === '1'){
+        if ($extensionConfiguration['debug']['value'] === '1') {
             $this->view->assign('query', $demand->getRequestUrl());
-            #DebuggerUtility::var_dump($demand,'Demand');
-            #DebuggerUtility::var_dump($result,'Result');
+            //DebuggerUtility::var_dump($demand,'Demand');
+            //DebuggerUtility::var_dump($result,'Result');
         }
         $this->view->assign('pagination', $pagination);
         $this->view->assign('demand', $demand);
@@ -135,7 +133,6 @@ class SearchController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
             //We limit the pagination menu to 11 pages
             //Case I: the calculatet pages are below 10
             if ($pages <= 10) {
-
                 $maxPagination = $pages;
             }
             //Case II: the calculated pages are more than 10

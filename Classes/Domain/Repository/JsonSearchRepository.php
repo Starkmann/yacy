@@ -33,6 +33,11 @@ use Eike\Yacy\Domain\Model\Demand;
  */
 class JsonSearchRepository extends AbstractSearchRepository
 {
+    /**
+     * @param Demand $demand
+     * @param int $page
+     * @return mixed
+     */
     public function findDemanded(Demand $demand, $page =1)
     {
         $json = json_decode(file_get_contents($demand->getRequestUrl()), true);
