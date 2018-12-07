@@ -25,5 +25,7 @@ plugin.tx_yacy {
 		resultPage =
 		# cat=plugin.tx_yacy//f; type=string; label=Collection you want to use
         collection =
-	}
+        # cat=plugin.tx_yacy//f; type=string; label=Items to show per page in pagination
+        itemsPerPage = 10
+    }
 }

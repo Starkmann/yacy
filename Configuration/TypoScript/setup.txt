@@ -19,6 +19,7 @@ plugin.tx_yacy {
 		interface = {$plugin.tx_yacy.settings.interface}
 		resultPage = {$plugin.tx_yacy.settings.resultPage}
 		collection = {$plugin.tx_yacy.settings.collection}
+		itemsPerPage = {$plugin.tx_yacy.settings.itemsPerPage}
 	}
 }
 

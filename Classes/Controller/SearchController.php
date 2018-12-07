@@ -84,15 +84,9 @@ class SearchController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
      */
     public function searchAction(Demand $demand, $page = 1)
     {
-        /** @var \TYPO3\CMS\Extensionmanager\Utility\ConfigurationUtility $configurationUtility */
-        $configurationUtility = $this->objectManager->get('TYPO3\CMS\Extensionmanager\Utility\ConfigurationUtility');
-        $extensionConfiguration = $configurationUtility->getCurrentConfiguration('yacy');
-        if($extensionConfiguration['debug']['value'] === '1'){
-            $this->view->assign('query', $demand->getRequestUrl());
-        }
-        $itemsPerPage = 10;
+        $demand->setMaximumRecords($this->settings['itemsPerPage']);
 
-        $demand->setStartRecord($itemsPerPage * ($page - 1));
+        $demand->setStartRecord($demand->getMaximumRecords() * ($page - 1));
 
         if($this->settings['collection'] !== '' && strpos($demand->getQuery(),'collection') === false) {
             $demand->setQuery($demand->getQuery().'+collection'.':'.$this->settings['collection']);
@@ -102,8 +96,14 @@ class SearchController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
 
         $resultsCount = $this->searchRepository->countAllRequested($demand);
 
-        $pagination = $this->buildPagination($itemsPerPage, $page, $demand, $resultsCount);
+        $pagination = $this->buildPagination($demand->getMaximumRecords(), $page, $resultsCount);
 
+        /** @var \TYPO3\CMS\Extensionmanager\Utility\ConfigurationUtility $configurationUtility */
+        $configurationUtility = $this->objectManager->get('TYPO3\CMS\Extensionmanager\Utility\ConfigurationUtility');
+        $extensionConfiguration = $configurationUtility->getCurrentConfiguration('yacy');
+        if($extensionConfiguration['debug']['value'] === '1'){
+            $this->view->assign('query', $demand->getRequestUrl());
+        }
         $this->view->assign('pagination', $pagination);
         $this->view->assign('demand', $demand);
         $this->view->assign('results', $results);
@@ -113,12 +113,13 @@ class SearchController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
     /**
      * @param int $itemsPerPage
      * @param int $page
-     * @param \Eike\Yacy\Domain\Model\Demand $demand
      * @param int $resultsCount
      * @return int
      */
-    protected function buildPagination($itemsPerPage = 10, $page = 1, \Eike\Yacy\Domain\Model\Demand $demand, $resultsCount)
+    protected function buildPagination($itemsPerPage = 10, $page = 1, $resultsCount)
     {
+        $minPagination = 0;
+        $maxPagination = 0;
         if (!$resultsCount <= $itemsPerPage) {
             //build the pagination
 
@@ -127,7 +128,7 @@ class SearchController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
             //We limit the pagination menu to 11 pages
             //Case I: the calculatet pages are below 10
             if ($pages <= 10) {
-                $minPagination = 1;
+
                 $maxPagination = $pages;
             }
             //Case II: the calculated pages are more than 10
