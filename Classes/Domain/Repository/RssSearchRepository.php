@@ -33,11 +33,15 @@ use Eike\Yacy\Domain\Model\Demand;
  */
 class RssSearchRepository extends AbstractSearchRepository
 {
+    /**
+     * @param Demand $demand
+     * @param int $page
+     * @return array|mixed
+     */
     public function findDemanded(Demand $demand, $page =1)
     {
         $xml = new \SimpleXMLElement($demand->getRequestUrl(), 1, true);
-        $result = [];
-        $result = json_decode(json_encode($xml->channel),TRUE);
+        $result = json_decode(json_encode($xml->channel), true);
         $result['items'] = $result['item'];
         unset($result['item']);
         $result['startIndex'] = (int)$xml->channel->children('opensearch', true)->startIndex;

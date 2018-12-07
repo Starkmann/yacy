@@ -26,7 +26,6 @@
 
 namespace Eike\Yacy\Factory;
 
-
 use Eike\Yacy\Domain\Repository\JsonSearchRepository;
 use Eike\Yacy\Domain\Repository\RssSearchRepository;
 use TYPO3\CMS\Extbase\Object\ObjectManager;
@@ -38,9 +37,15 @@ class SearchRepositoryFactory
      */
     protected $objectManager;
 
-    public function injectObjectManager(ObjectManager $objectManager){
+    public function injectObjectManager(ObjectManager $objectManager)
+    {
         $this->objectManager = $objectManager;
     }
+
+    /**
+     * @param $interfaceName
+     * @return null|object
+     */
     public function createSearchRepository($interfaceName)
     {
         if ($interfaceName === 'yacysearch.rss') {
@@ -50,7 +55,5 @@ class SearchRepositoryFactory
             return $this->objectManager->get(JsonSearchRepository::class);
         }
         return null;
-
     }
-
 }

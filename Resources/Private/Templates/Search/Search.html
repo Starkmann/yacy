@@ -19,7 +19,6 @@
 <f:for each="{results}" as="result">
 	<f:if condition="{demand.contentDom} == image">
 		<f:then>
-			yyy
 			<f:if condition="{result.url}">
 				<f:link.external uri="{result.url}"><img src="{result.image}" alt="{result.title}"> {result.title}</f:link.external>
 			</f:if>
