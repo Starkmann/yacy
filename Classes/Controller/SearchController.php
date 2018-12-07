@@ -84,9 +84,19 @@ class SearchController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
      */
     public function searchAction(Demand $demand, $page = 1)
     {
+        /** @var \TYPO3\CMS\Extensionmanager\Utility\ConfigurationUtility $configurationUtility */
+        $configurationUtility = $this->objectManager->get('TYPO3\CMS\Extensionmanager\Utility\ConfigurationUtility');
+        $extensionConfiguration = $configurationUtility->getCurrentConfiguration('yacy');
+        if($extensionConfiguration['debug']['value'] === '1'){
+            $this->view->assign('query', $demand->getRequestUrl());
+        }
         $itemsPerPage = 10;
 
         $demand->setStartRecord($itemsPerPage * ($page - 1));
+
+        if($this->settings['collection'] !== '' && strpos($demand->getQuery(),'collection') === false) {
+            $demand->setQuery($demand->getQuery().'+collection'.':'.$this->settings['collection']);
+        }
 
         $results = $this->searchRepository->findDemanded($demand);
 

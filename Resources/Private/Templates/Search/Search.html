@@ -6,11 +6,15 @@
 			<f:render partial="Search/SearchForm" arguments="{demand:demand}" section="main" />
 		</div>
 	</section>
+	<f:if condition="{query}">
+		<div>{query}</div>
+	</f:if>
 <f:if condition="{results}">
 <div>
 	{resultsCount} <f:translate key="yacy.resultsCount"> results found</f:translate>
 </div>
 <br>
+
 <f:for each="{results}" as="result">
 	<f:link.external uri="{result.link}"><b>{result.title}</b></f:link.external> <br>
 	<f:link.external uri="{result.link}">{result.link}</f:link.external>
@@ -33,7 +37,7 @@
 			</f:link.action>
 		</f:if>
 		<f:for each="{pagination.pages}" as="item">
-			<f:link.action action="search" arguments="{page: item.text, demand: demand}" 
+			<f:link.action action="search" arguments="{page: item.text, demand: demand}"
 			class="paginator-page {f:if(condition: '{0:pagination.current} == {0:item.text}',then: ' active', else: '')}">
 			{item.text}
 		</f:link.action>
@@ -49,7 +53,7 @@
 			</f:link.action>
 		</f:if>
 	</f:if>
-	 
+
 	<br class="clear-all">
 </div>
 </f:section>

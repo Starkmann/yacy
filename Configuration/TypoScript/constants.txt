@@ -23,5 +23,7 @@ plugin.tx_yacy {
         interface = yacysearch.rss
 		# cat=plugin.tx_yacy//e; type=string; label=PID of the result page
 		resultPage =
+		# cat=plugin.tx_yacy//f; type=string; label=Collection you want to use
+        collection =
 	}
 }

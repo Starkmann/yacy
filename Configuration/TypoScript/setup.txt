@@ -18,6 +18,7 @@ plugin.tx_yacy {
 		protocol = {$plugin.tx_yacy.settings.protocol}
 		interface = {$plugin.tx_yacy.settings.interface}
 		resultPage = {$plugin.tx_yacy.settings.resultPage}
+		collection = {$plugin.tx_yacy.settings.collection}
 	}
 }
 
