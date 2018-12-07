@@ -1,6 +1,4 @@
-
-
-
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
 <f:section name="main">
 <f:if condition="{demand.resultPage}">
 	<f:then>
@@ -18,13 +16,13 @@
 
 <f:section name="inner">
 	<fieldset class="subject">
-			<label for="search"><f:translate key="tx_publications_domain_item.search" /></label>
-			<f:form.textfield id="search" property="query" placeholder="Attac-Suche" class="input-large tooltiplink"/>
+			<label for="search"><f:translate key="tx_yacy_domain_model_searchresult.title" /></label>
+			<f:form.textfield id="search" property="query" placeholder="{f:translate(key: 'tx_yacy_domain_model_searchresult.subject')}" class="input-large tooltiplink"/>
 			<f:form.hidden property="port"/>
 			<f:form.hidden property="domain"/>
 			<f:form.hidden property="protocol"/>
 			<f:form.hidden property="interface"/>
-	    <input type="image" class="button" src="fileadmin/template/img/searchp_01.png">
+	    <input type="image" class="button">
 	</fieldset>
 
 </f:section>
