@@ -75,6 +75,8 @@ class SearchController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
             $demand->setResultPage($this->settings['resultPage']);
         }
         $this->view->assign('demand', $demand);
+        $this->view->assign('searchConfiguration', json_encode($this->settings));
+
     }
 
     /**
@@ -113,6 +115,7 @@ class SearchController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
         $this->view->assign('results', $result['items']);
         $this->view->assign('resultsCount', $result['totalResults']);
         $this->view->assign('navigation', $result['navigation']);
+        $this->view->assign('searchConfiguration', json_encode($this->settings));
     }
 
     /**

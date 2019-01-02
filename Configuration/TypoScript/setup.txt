@@ -90,3 +90,7 @@ plugin.tx_yacy._CSS_DEFAULT_STYLE (
 	}
 
 )
+page.includeJSFooter.tx_yacy_typeahead = EXT:yacy/Resources/Public/Javascript/typeahead.jquery.js
+page.includeJSFooter.tx_yacy_searchConfigurationParser = EXT:yacy/Resources/Public/Javascript/searchConfigurationParser.js
+page.includeJSFooter.tx_yacy = EXT:yacy/Resources/Public/Javascript/main.js
+
