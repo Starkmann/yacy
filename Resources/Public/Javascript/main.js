@@ -12,22 +12,22 @@
 
 
 		var suggestTimeoutId = null;
-		var searchConfiguration = searchConfigurationParser(this);
-		//console.log(searchConfiguration);
+		var searchConfiguration = searchConfigurationParser($('[data-search-configuration]'));
+		console.log(searchConfiguration);
 
 		/* Configure the search input field to get suggestions on key strokes */
 		$('#search').typeahead({hint:false,highlight:true,minLength:1}, {
 			name: 'states',
 			displayKey: 'value',
-			source: function(query, render, searchConfiguration) {
+			source: function(query, sync, render) {
 				if(suggestTimeoutId != null) {
 					/* Remove delayed call not yet done */
 					clearTimeout(suggestTimeoutId);
 				}
 				/* Limit the rate of calls to the suggest API by adding a delay before effective call */
 				suggestTimeoutId = setTimeout(function() {
-					//console.log(searchConfiguration['protocol'] + searchConfiguration['domain'] + searchConfiguration['port'] + "/suggest.json?q=" + query);
-					$.getJSON(searchConfiguration['protocol'] + searchConfiguration['domain'] + searchConfiguration['port'] + "/suggest.json?q=" + query, function(data) {
+					//console.log(searchConfiguration['protocol'] + '://' + searchConfiguration['domain'] + ':' + searchConfiguration['port'] + "/suggest.json?q=" + query);
+					$.getJSON(searchConfiguration['protocol'] + '://' + searchConfiguration['domain'] + ':' + searchConfiguration['port'] + "/suggest.json?q=" + query, function(data) {
 						var parsed = [];
 						for (var i = 0; i < data[1].length; i++) {
 							var row = data[1][i];

@@ -3,7 +3,7 @@
 
 <f:section name="main">
 	<section class="searchbox clearfix">
-		<div class="search" data-search-configuration="{searchConfiguration -> f:format.htmlspecialchars()}">
+		<div data-search-configuration="{searchConfiguration -> f:format.htmlspecialchars()}">
 			<f:render partial="Search/SearchForm" arguments="{demand:demand, settings:settings, searchConfiguration:searchConfiguration}" section="main" />
 		</div>
 	</section>
