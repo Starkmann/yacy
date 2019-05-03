@@ -18,6 +18,11 @@ plugin.tx_yacy {
 		protocol = {$plugin.tx_yacy.settings.protocol}
 		interface = {$plugin.tx_yacy.settings.interface}
 		resultPage = {$plugin.tx_yacy.settings.resultPage}
+		collection = {$plugin.tx_yacy.settings.collection}
+		itemsPerPage = {$plugin.tx_yacy.settings.itemsPerPage}
+		filter = {$plugin.tx_yacy.settings.filter}
+		advancedSettings = {$plugin.tx_yacy.settings.advancedSettings}
+		}
 	}
 }
 
@@ -85,3 +90,7 @@ plugin.tx_yacy._CSS_DEFAULT_STYLE (
 	}
 
 )
+page.includeJSFooter.tx_yacy_typeahead = EXT:yacy/Resources/Public/Javascript/typeahead.jquery.js
+page.includeJSFooter.tx_yacy_searchConfigurationParser = EXT:yacy/Resources/Public/Javascript/searchConfigurationParser.js
+page.includeJSFooter.tx_yacy = EXT:yacy/Resources/Public/Javascript/main.js
+
