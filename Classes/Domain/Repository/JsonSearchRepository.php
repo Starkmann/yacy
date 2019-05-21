@@ -1,17 +1,20 @@
 <?php
-namespace Eike\Yacy\Tests\Unit\Controller;
+namespace Eike\Yacy\Domain\Repository;
+
+use Eike\Yacy\Domain\Model\Demand;
 
 /***************************************************************
+ *
  *  Copyright notice
  *
- *  (c) 2018 Eike Starkmann <eike.starkmann@posteo.de>
+(c) 2018 Eike Starkmann <eike.starkmann@posteo.de>
  *
  *  All rights reserved
  *
  *  This script is part of the TYPO3 project. The TYPO3 project is
  *  free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation; either version 2 of the License, or
+ *  the Free Software Foundation; either version 3 of the License, or
  *  (at your option) any later version.
  *
  *  The GNU General Public License can be found at
@@ -26,25 +29,18 @@ namespace Eike\Yacy\Tests\Unit\Controller;
  ***************************************************************/
 
 /**
- * Test case for class Eike\Yacy\Controller\SearchResultController.
- *
- * @author Eike Starkmann <eike.starkmann@posteo.de>
+ * The repository for SearchResults
  */
-class SearchResultControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
+class JsonSearchRepository extends AbstractSearchRepository
 {
-
     /**
-     * @var \Eike\Yacy\Controller\SearchResultController
+     * @param Demand $demand
+     * @param int $page
+     * @return mixed
      */
-    protected $subject = null;
-
-    protected function setUp()
+    public function findDemanded(Demand $demand, $page =1)
     {
-        $this->subject = $this->getMock('Eike\\Yacy\\Controller\\SearchResultController', ['redirect', 'forward', 'addFlashMessage'], [], '', false);
-    }
-
-    protected function tearDown()
-    {
-        unset($this->subject);
+        $json = json_decode(file_get_contents($demand->getRequestUrl()), true);
+        return $json['channels'][0];
     }
 }

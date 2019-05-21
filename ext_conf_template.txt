@@ -1,0 +1,2 @@
+# cat=basic/enable; type=boolean; label=Debug mode
+debug = 0

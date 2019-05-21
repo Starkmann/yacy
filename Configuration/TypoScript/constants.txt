@@ -13,11 +13,23 @@ plugin.tx_yacy {
 		storagePid =
 	}
 	settings {
+	    # cat=plugin.tx_yacy//a; type=string; label=Protocoll (http/https)
+    	protocol = http
 		# cat=plugin.tx_yacy//b; type=string; label=Domain of yacy peer
-		domain = 
-		# cat=plugin.tx_yacy//b; type=string; label=Port of yacy peer
-		port = 
-		# cat=plugin.tx_yacy//b; type=string; label=PID of the result page
-		resultPage = 
-	}
+		domain =
+		# cat=plugin.tx_yacy//c; type=string; label=Port of yacy peer
+		port =
+		# cat=plugin.tx_yacy//d; type=string; label=Choose one if yacy's interfaces
+        interface = yacysearch.json
+		# cat=plugin.tx_yacy//e; type=string; label=PID of the result page
+		resultPage =
+		# cat=plugin.tx_yacy//f; type=string; label=Collection you want to use
+        collection =
+        # cat=plugin.tx_yacy//g; type=string; label=Items to show per page in pagination
+        itemsPerPage = 10
+        # cat=plugin.tx_yacy//h; type=boolean; label=Activate filter in frontend
+        filter = 0
+        # cat=plugin.tx_yacy//i; type=boolean; label=Activate advanced settings in frontend
+        advancedSettings = 0
+    }
 }
