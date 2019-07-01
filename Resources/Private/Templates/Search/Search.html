@@ -3,8 +3,8 @@
 
 <f:section name="main">
 	<section class="searchbox clearfix">
-		<div class="searchAndFilter">
-			<f:render partial="Search/SearchForm" arguments="{demand:demand, settings:settings}" section="main" />
+		<div data-search-configuration="{searchConfiguration -> f:format.htmlspecialchars()}">
+			<f:render partial="Search/SearchForm" arguments="{demand:demand, settings:settings, searchConfiguration:searchConfiguration}" section="main" />
 		</div>
 	</section>
 	<f:if condition="{query}">
@@ -17,7 +17,7 @@
 <br>
 
 <f:for each="{results}" as="result">
-	<f:if condition="{demand.contentDom} == image">
+	<f:if condition="{demand.contentDom} == 'image'">
 		<f:then>
 			<f:if condition="{result.url}">
 				<f:link.external uri="{result.url}"><img src="{result.image}" alt="{result.title}"> {result.title}</f:link.external>
