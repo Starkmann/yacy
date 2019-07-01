@@ -2,6 +2,8 @@
 namespace Eike\Yacy\Domain\Repository;
 
 use Eike\Yacy\Domain\Model\Demand;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Object\ObjectManager;
 
 /***************************************************************
  *
@@ -40,7 +42,18 @@ class JsonSearchRepository extends AbstractSearchRepository
      */
     public function findDemanded(Demand $demand, $page =1)
     {
-        $json = json_decode(file_get_contents($demand->getRequestUrl()), true);
+        $objectManager = GeneralUtility::makeInstance(ObjectManager::class);
+        $configurationUtility = $objectManager->get('TYPO3\CMS\Extensionmanager\Utility\ConfigurationUtility');
+        $extensionConfiguration = $configurationUtility->getCurrentConfiguration('yacy');
+        try{
+            $json = json_decode(file_get_contents($demand->getRequestUrl()), true);
+        }catch(\Exception $exception){
+            GeneralUtility::devLog($exception->getMessage(),'yacy');
+            if($extensionConfiguration['debug']['value'] === '1'){
+                throw $exception;
+            }
+        }
+
         return $json['channels'][0];
     }
 }

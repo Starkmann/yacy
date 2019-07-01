@@ -107,6 +107,7 @@ class SearchController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
         $extensionConfiguration = $configurationUtility->getCurrentConfiguration('yacy');
         if ($extensionConfiguration['debug']['value'] === '1') {
             $this->view->assign('query', $demand->getRequestUrl());
+            $this->view->assign('debug', 1);
             //DebuggerUtility::var_dump($demand,'Demand');
             //DebuggerUtility::var_dump($result,'Result');
         }

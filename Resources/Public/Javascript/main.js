@@ -13,7 +13,7 @@
 
 		var suggestTimeoutId = null;
 		var searchConfiguration = searchConfigurationParser($('[data-search-configuration]'));
-		console.log(searchConfiguration);
+		// console.log(searchConfiguration);
 
 		/* Configure the search input field to get suggestions on key strokes */
 		$('#search').typeahead({hint:false,highlight:true,minLength:1}, {

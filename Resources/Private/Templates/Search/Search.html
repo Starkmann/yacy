@@ -28,10 +28,15 @@
 
 		</f:then>
 		<f:else>
-			<f:link.external uri="{result.link}"><b>{result.title}</b></f:link.external> <br>
+			<f:link.external uri="{result.link}"><b>{result.title}</b></f:link.external>
+			<f:if condition="{debug}">
+				Ranking: {result.ranking}
+			</f:if>
+			<br>
 			<f:link.external uri="{result.link}">{result.link}</f:link.external>
 			<f:format.date format="d.m.Y">{result.pubDate}</f:format.date><br>
 			<f:format.html>{result.description}</f:format.html>
+
 		</f:else>
 	</f:if>
 
