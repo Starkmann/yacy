@@ -4,6 +4,7 @@ namespace Eike\Yacy\Domain\Repository;
 use Eike\Yacy\Domain\Model\Demand;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Object\ObjectManager;
+use TYPO3\CMS\Extbase\SignalSlot\Dispatcher;
 
 /***************************************************************
  *
@@ -38,7 +39,8 @@ class JsonSearchRepository extends AbstractSearchRepository
     /**
      * @param Demand $demand
      * @param int $page
-     * @return mixed
+     * @throws \TYPO3\CMS\Extbase\SignalSlot\Exception\InvalidSlotException
+     * @throws \TYPO3\CMS\Extbase\SignalSlot\Exception\InvalidSlotReturnException
      */
     public function findDemanded(Demand $demand, $page =1)
     {
@@ -53,7 +55,9 @@ class JsonSearchRepository extends AbstractSearchRepository
                 throw $exception;
             }
         }
-
+        /**@var \TYPO3\CMS\Extbase\SignalSlot\Dispatcher $signalSlotDispatcher **/
+        $signalSlotDispatcher = $objectManager->get(Dispatcher::class);
+        $signalSlotDispatcher->dispatch(__CLASS__, 'beforeReturnResults', [$demand, $page, &$json]);
         return $json['channels'][0];
     }
 }
