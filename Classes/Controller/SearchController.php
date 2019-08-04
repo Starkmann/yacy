@@ -129,7 +129,7 @@ class SearchController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
     {
         $minPagination = 0;
         $maxPagination = 0;
-        if (!$resultsCount <= $itemsPerPage) {
+        if (!($resultsCount <= (int)$itemsPerPage)) {
             //build the pagination
 
             //build paginator
