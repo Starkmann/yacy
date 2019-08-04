@@ -1,7 +1,6 @@
 <?php
-namespace Eike\Yacy\Tests\Unit\Controller;
-
 /***************************************************************
+ *
  *  Copyright notice
  *
  *  (c) 2018 Eike Starkmann <eike.starkmann@posteo.de>
@@ -11,7 +10,7 @@ namespace Eike\Yacy\Tests\Unit\Controller;
  *  This script is part of the TYPO3 project. The TYPO3 project is
  *  free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation; either version 2 of the License, or
+ *  the Free Software Foundation; either version 3 of the License, or
  *  (at your option) any later version.
  *
  *  The GNU General Public License can be found at
@@ -25,26 +24,36 @@ namespace Eike\Yacy\Tests\Unit\Controller;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
-/**
- * Test case for class Eike\Yacy\Controller\SearchResultController.
- *
- * @author Eike Starkmann <eike.starkmann@posteo.de>
- */
-class SearchResultControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
+namespace Eike\Yacy\Factory;
+
+use Eike\Yacy\Domain\Repository\JsonSearchRepository;
+use Eike\Yacy\Domain\Repository\RssSearchRepository;
+use TYPO3\CMS\Extbase\Object\ObjectManager;
+
+class SearchRepositoryFactory
 {
-
     /**
-     * @var \Eike\Yacy\Controller\SearchResultController
+     * @var ObjectManager
      */
-    protected $subject = null;
+    protected $objectManager;
 
-    protected function setUp()
+    public function injectObjectManager(ObjectManager $objectManager)
     {
-        $this->subject = $this->getMock('Eike\\Yacy\\Controller\\SearchResultController', ['redirect', 'forward', 'addFlashMessage'], [], '', false);
+        $this->objectManager = $objectManager;
     }
 
-    protected function tearDown()
+    /**
+     * @param $interfaceName
+     * @return null|object
+     */
+    public function createSearchRepository($interfaceName)
     {
-        unset($this->subject);
+        if ($interfaceName === 'yacysearch.rss') {
+            return $this->objectManager->get(RssSearchRepository::class);
+        }
+        if ($interfaceName === 'yacysearch.json') {
+            return $this->objectManager->get(JsonSearchRepository::class);
+        }
+        return null;
     }
 }

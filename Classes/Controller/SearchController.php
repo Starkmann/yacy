@@ -1,6 +1,9 @@
 <?php
 namespace Eike\Yacy\Controller;
-use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
+
+use Eike\Yacy\Domain\Model\Demand;
+use Eike\Yacy\Factory\SearchRepositoryFactory;
+
 /***************************************************************
  *
  *  Copyright notice
@@ -29,130 +32,147 @@ use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 /**
  * SearchController
  */
-class SearchController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController {
+class SearchController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
+{
 
+    /**
+     * searchResultRepository
+     *
+     * @var \Eike\Yacy\Domain\Repository\SearchRepositoryInterface
+     */
+    protected $searchRepository = null;
 
-	/**
-	 * searchResultRepository
-	 *
-	 * @var \Eike\Yacy\Domain\Repository\SearchRepository
-	 * @inject
-	 */
-	protected $searchRepository = NULL;
+    /**
+     */
+    public function initializeSearchAction()
+    {
+        $itemDemandConfiguration = $this->arguments['demand']->getPropertyMappingConfiguration();
+        $itemDemandConfiguration->allowAllProperties();
+        $itemDemandConfiguration
+        ->setTypeConverterOption(
+                'TYPO3\CMS\Extbase\Property\TypeConverter\PersistentObjectConverter',
+                \TYPO3\CMS\Extbase\Property\TypeConverter\PersistentObjectConverter::CONFIGURATION_CREATION_ALLOWED,
+                true
+        );
+    }
 
-	/**
-	 * @return void
-	 */
-	public function initializeSearchAction() {
-		$itemDemandConfiguration = $this->arguments['demand']->getPropertyMappingConfiguration();
-		$itemDemandConfiguration->allowAllProperties();
-		$itemDemandConfiguration
-		->setTypeConverterOption(
-				'TYPO3\CMS\Extbase\Property\TypeConverter\PersistentObjectConverter',
-				\TYPO3\CMS\Extbase\Property\TypeConverter\PersistentObjectConverter::CONFIGURATION_CREATION_ALLOWED,
-				TRUE
-		);
-	}
+    /**
+     * action index
+     */
+    public function indexAction()
+    {
+        /* @var $demand \Eike\Yacy\Domain\Model\Demand */
 
-	/**
-	 * action index
-	 *
-	 * @return void
-	 */
-	public function indexAction() {
-		/* @var $demand Eike\Yacy\Domain\Model\Demand */
+        $demand = $this->objectManager->get('Eike\Yacy\Domain\Model\Demand');
 
-		$demand = $this->objectManager->get('Eike\Yacy\Domain\Model\Demand');
+        if ($this->settings['domain']&&$this->settings['port']) {
+            $demand->setDomain($this->settings['domain']);
+            $demand->setPort($this->settings['port']);
+            $demand->setInterface($this->settings['interface']);
+            $demand->setProtocol($this->settings['protocol']);
+        }
+        if ($this->settings['resultPage']) {
+            $demand->setResultPage($this->settings['resultPage']);
+        }
+        $this->view->assign('demand', $demand);
+        $this->view->assign('searchConfiguration', json_encode($this->settings));
 
-		if($this->settings['domain']&&$this->settings['port']){
-			$demand->setHost($this->settings['domain']);
-			$demand->setPort($this->settings['port']);
-		}
-		if($this->settings['resultPage']){
-			$demand->setResultPage($this->settings['resultPage']);
-		}
-		$this->view->assign('demand', $demand);
-	}
+    }
 
-	/**
-	 * Search Action
-	 * @param \Eike\Yacy\Domain\Model\Demand $demand
-	 * @param integer $page
-	 */
-	public function searchAction(\Eike\Yacy\Domain\Model\Demand $demand, $page = 1) {
-		$itemsPerPage = 10;
+    /**
+     * Search Action
+     * @param \Eike\Yacy\Domain\Model\Demand $demand
+     * @param int $page
+     */
+    public function searchAction(Demand $demand, $page = 1)
+    {
+        /** @var SearchRepositoryFactory $searchRepositoryFactory */
+        $searchRepositoryFactory = $this->objectManager->get(SearchRepositoryFactory::class);
+        $this->searchRepository = $searchRepositoryFactory->createSearchRepository($demand->getInterface());
 
-		$demand->setStartRecord($itemsPerPage * ($page - 1));
+        $demand->setMaximumRecords($this->settings['itemsPerPage']);
 
-		$results = $this->searchRepository->findDemandedViaYacyRss($demand);
+        $demand->setStartRecord($demand->getMaximumRecords() * ($page - 1));
 
-		$resultsCount = $this->searchRepository->countAllRequested($demand);
+        if ($this->settings['collection'] !== '' && strpos($demand->getQuery(), 'collection') === false) {
+            $demand->setQuery($demand->getQuery() . '+collection' . ':' . $this->settings['collection']);
+        }
 
-		$pagination = $this->buildPagination($itemsPerPage,$page,$demand, $resultsCount);
+        $result = $this->searchRepository->findDemanded($demand);
 
-		$this->view->assign('pagination', $pagination);
-		$this->view->assign('demand', $demand);
-		$this->view->assign('results', $results);
-		$this->view->assign('resultsCount', $resultsCount);
-	}
+        $pagination = $this->buildPagination($demand->getMaximumRecords(), $page, $result['totalResults']);
 
-	/**
-	 *
-	 * @param integer $itemsPerPage
-	 * @param integer $page
-	 * @param \Eike\Yacy\Domain\Model\Demand $demand
-	 * @param integer $resultsCount
-	 * @return integer
-	 */
-	protected function buildPagination($itemsPerPage = 10, $page = 1 , \Eike\Yacy\Domain\Model\Demand $demand, $resultsCount){
+        /** @var \TYPO3\CMS\Extensionmanager\Utility\ConfigurationUtility $configurationUtility */
+        $configurationUtility = $this->objectManager->get('TYPO3\CMS\Extensionmanager\Utility\ConfigurationUtility');
+        $extensionConfiguration = $configurationUtility->getCurrentConfiguration('yacy');
+        if ($extensionConfiguration['debug']['value'] === '1') {
+            $this->view->assign('query', $demand->getRequestUrl());
+            $this->view->assign('debug', 1);
+            //DebuggerUtility::var_dump($demand,'Demand');
+            //DebuggerUtility::var_dump($result,'Result');
+        }
+        $this->view->assign('pagination', $pagination);
+        $this->view->assign('demand', $demand);
+        $this->view->assign('results', $result['items']);
+        $this->view->assign('resultsCount', $result['totalResults']);
+        $this->view->assign('navigation', $result['navigation']);
+        $this->view->assign('searchConfiguration', json_encode($this->settings));
+    }
 
-		if(!$resultsCount <= $itemsPerPage) {
-			//build the pagination
+    /**
+     * @param int $itemsPerPage
+     * @param int $page
+     * @param int $resultsCount
+     * @return int
+     */
+    protected function buildPagination($itemsPerPage = 10, $page = 1, $resultsCount)
+    {
+        $minPagination = 0;
+        $maxPagination = 0;
+        if (!($resultsCount <= (int)$itemsPerPage)) {
+            //build the pagination
 
-			//build paginator
-			$pages = ceil($resultsCount / $itemsPerPage);
-			//We limit the pagination menu to 11 pages
-			//Case I: the calculatet pages are below 10
-			if ($pages <= 10) {
-				$minPagination = 1;
-				$maxPagination = $pages;
-			}
-			//Case II: the calculated pages are more than 10
-			if ($pages > 10) {
-				$maxPagination = $page + 5;
-				if ($maxPagination > $pages) {
-					$maxPagination = $pages;
-				}
-				$minPagination = $maxPagination -11;
-				if($minPagination <1) {
-					$minPagination = 1;
-					$maxPagination = 11;
-				}
-			}
-			//Now we bild the page navigation
-			for ($i = $minPagination; $i <= $maxPagination; $i++) {
-				$pagination['pages'][$i]['text'] = $i;
-			}
-			//Build next / prev links
-			if($page >1) {
-				$pagination['prev'] = $page -1;
-			}
-			if($page < $pages) {
-				$pagination['next'] = $page +1;
-			}
-			//build the firstpage / lastPage links
-			if($minPagination > 1){
-				$pagination['first'] = 1;
-			}
-			if($maxPagination < $pages){
-				$pagination['last'] = $pages;
-			}
-		}
-		//write the actual page for css
-		$pagination['current'] = $page;
+            //build paginator
+            $pages = ceil($resultsCount / $itemsPerPage);
+            //We limit the pagination menu to 11 pages
+            //Case I: the calculatet pages are below 10
+            if ($pages <= 10) {
+                $maxPagination = $pages;
+            }
+            //Case II: the calculated pages are more than 10
+            if ($pages > 10) {
+                $maxPagination = $page + 5;
+                if ($maxPagination > $pages) {
+                    $maxPagination = $pages;
+                }
+                $minPagination = $maxPagination -11;
+                if ($minPagination <1) {
+                    $minPagination = 1;
+                    $maxPagination = 11;
+                }
+            }
+            //Now we bild the page navigation
+            for ($i = $minPagination; $i <= $maxPagination; $i++) {
+                $pagination['pages'][$i]['text'] = $i;
+            }
+            //Build next / prev links
+            if ($page >1) {
+                $pagination['prev'] = $page -1;
+            }
+            if ($page < $pages) {
+                $pagination['next'] = $page +1;
+            }
+            //build the firstpage / lastPage links
+            if ($minPagination > 1) {
+                $pagination['first'] = 1;
+            }
+            if ($maxPagination < $pages) {
+                $pagination['last'] = $pages;
+            }
+        }
+        //write the actual page for css
+        $pagination['current'] = $page;
 
-		return $pagination;
-	}
-
-
+        return $pagination;
+    }
 }
