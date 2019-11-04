@@ -98,7 +98,7 @@ class SearchController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
             $demand->setQuery($demand->getQuery() . '+collection' . ':' . $this->settings['collection']);
         }
 
-        $result = $this->searchRepository->findDemanded($demand);
+        $result = $this->searchRepository->findDemanded($demand, $page);
 
         $pagination = $this->buildPagination($demand->getMaximumRecords(), $page, $result['totalResults']);
 
