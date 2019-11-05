@@ -86,6 +86,12 @@ class SearchController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
      */
     public function searchAction(Demand $demand, $page = 1)
     {
+        if ($this->settings['domain']&&$this->settings['port']) {
+            $demand->setDomain($this->settings['domain']);
+            $demand->setPort($this->settings['port']);
+            $demand->setInterface($this->settings['interface']);
+            $demand->setProtocol($this->settings['protocol']);
+        }
         /** @var SearchRepositoryFactory $searchRepositoryFactory */
         $searchRepositoryFactory = $this->objectManager->get(SearchRepositoryFactory::class);
         $this->searchRepository = $searchRepositoryFactory->createSearchRepository($demand->getInterface());
