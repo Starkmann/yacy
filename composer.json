@@ -14,7 +14,7 @@
 		"issues": "https://github.com/Starkmann/yacy/issues"
 	},
 	"require": {
-		"typo3/cms": "^7.6 | ^8.7"
+		"typo3/cms-core": "^9.5 | ^10.4"
 	},
 	"replace": {
 		"yacy": "self.version"
@@ -23,5 +23,10 @@
 		"psr-4": {
 			"Eike\\Yacy\\": "Classes"
 		}
-	}
+	},
+	"extra": {
+      "typo3/cms": {
+         "extension-key": "yacy"
+      }
+   }
 }

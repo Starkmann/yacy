@@ -3,6 +3,7 @@ namespace Eike\Yacy\Controller;
 
 use Eike\Yacy\Domain\Model\Demand;
 use Eike\Yacy\Factory\SearchRepositoryFactory;
+use TYPO3\CMS\Core\Configuration\ExtensionConfiguration;
 
 /***************************************************************
  *
@@ -104,13 +105,12 @@ class SearchController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
             $demand->setQuery($demand->getQuery() . '+collection' . ':' . $this->settings['collection']);
         }
 
-        $result = $this->searchRepository->findDemanded($demand, $page);
+        $extensionConfiguration = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(ExtensionConfiguration::class)
+            ->get('yacy');
+        $result = $this->searchRepository->findDemanded($demand, $page, $extensionConfiguration['debug']['value']);
 
         $pagination = $this->buildPagination($demand->getMaximumRecords(), $page, $result['totalResults']);
 
-        /** @var \TYPO3\CMS\Extensionmanager\Utility\ConfigurationUtility $configurationUtility */
-        $configurationUtility = $this->objectManager->get('TYPO3\CMS\Extensionmanager\Utility\ConfigurationUtility');
-        $extensionConfiguration = $configurationUtility->getCurrentConfiguration('yacy');
         if ($extensionConfiguration['debug']['value'] === '1') {
             $this->view->assign('query', $demand->getRequestUrl());
             $this->view->assign('debug', 1);

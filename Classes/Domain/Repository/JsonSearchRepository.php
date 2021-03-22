@@ -39,22 +39,25 @@ class JsonSearchRepository extends AbstractSearchRepository
     /**
      * @param Demand $demand
      * @param int $page
+     * @param int $debug
+     * @return mixed|void
+     * @throws \TYPO3\CMS\Extbase\Object\Exception
      * @throws \TYPO3\CMS\Extbase\SignalSlot\Exception\InvalidSlotException
      * @throws \TYPO3\CMS\Extbase\SignalSlot\Exception\InvalidSlotReturnException
      */
-    public function findDemanded(Demand $demand, $page =1)
+    public function findDemanded(Demand $demand, $page = 1, $debug = 0)
     {
-        $objectManager = GeneralUtility::makeInstance(ObjectManager::class);
-        $configurationUtility = $objectManager->get('TYPO3\CMS\Extensionmanager\Utility\ConfigurationUtility');
-        $extensionConfiguration = $configurationUtility->getCurrentConfiguration('yacy');
+
         try{
             $json = json_decode(file_get_contents($demand->getRequestUrl()), true);
         }catch(\Exception $exception){
             GeneralUtility::devLog($exception->getMessage(),'yacy');
-            if($extensionConfiguration['debug']['value'] === '1'){
+            if($debug === '1'){
                 throw $exception;
             }
         }
+
+        $objectManager = GeneralUtility::makeInstance(ObjectManager::class);
         /**@var \TYPO3\CMS\Extbase\SignalSlot\Dispatcher $signalSlotDispatcher **/
         $signalSlotDispatcher = $objectManager->get(Dispatcher::class);
         $signalSlotDispatcher->dispatch(__CLASS__, 'beforeReturnResults', [$demand, $page, &$json]);

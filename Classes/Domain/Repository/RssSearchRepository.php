@@ -36,9 +36,10 @@ class RssSearchRepository extends AbstractSearchRepository
     /**
      * @param Demand $demand
      * @param int $page
-     * @return array|mixed
+     * @param int $debug
+     * @return mixed|void
      */
-    public function findDemanded(Demand $demand, $page =1)
+    public function findDemanded(Demand $demand, $page =1, $debug = 0)
     {
         $xml = new \SimpleXMLElement($demand->getRequestUrl(), 1, true);
         $result = json_decode(json_encode($xml->channel), true);
