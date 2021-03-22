@@ -1,29 +1,28 @@
 
 plugin.tx_yacy {
-	view {
-		templateRootPath = {$plugin.tx_yacy.view.templateRootPath}
-		partialRootPath = {$plugin.tx_yacy.view.partialRootPath}
-		layoutRootPath = {$plugin.tx_yacy.view.layoutRootPath}
-	}
-	persistence {
-		storagePid = {$plugin.tx_yacy.persistence.storagePid}
-	}
-	features {
-		# uncomment the following line to enable the new Property Mapper.
-		# rewrittenPropertyMapper = 1
-	}
-	settings {
-		domain = {$plugin.tx_yacy.settings.domain}
-		port = {$plugin.tx_yacy.settings.port}
-		resultPage = {$plugin.tx_yacy.settings.resultPage}
-<<<<<<< Updated upstream
-=======
-		collection = {$plugin.tx_yacy.settings.collection}
-		itemsPerPage = {$plugin.tx_yacy.settings.itemsPerPage}
-		filter = {$plugin.tx_yacy.settings.filter}
-		advancedSettings = {$plugin.tx_yacy.settings.advancedSettings}
->>>>>>> Stashed changes
-	}
+    view {
+        templateRootPath = {$plugin.tx_yacy.view.templateRootPath}
+        partialRootPath = {$plugin.tx_yacy.view.partialRootPath}
+        layoutRootPath = {$plugin.tx_yacy.view.layoutRootPath}
+    }
+    persistence {
+        storagePid = {$plugin.tx_yacy.persistence.storagePid}
+    }
+    features {
+        # uncomment the following line to enable the new Property Mapper.
+        # rewrittenPropertyMapper = 1
+    }
+    settings {
+        domain = {$plugin.tx_yacy.settings.domain}
+        port = {$plugin.tx_yacy.settings.port}
+        protocol = {$plugin.tx_yacy.settings.protocol}
+        interface = {$plugin.tx_yacy.settings.interface}
+        resultPage = {$plugin.tx_yacy.settings.resultPage}
+        collection = {$plugin.tx_yacy.settings.collection}
+        itemsPerPage = {$plugin.tx_yacy.settings.itemsPerPage}
+        filter = {$plugin.tx_yacy.settings.filter}
+        advancedSettings = {$plugin.tx_yacy.settings.advancedSettings}
+    }
 }
 
 plugin.tx_yacy._CSS_DEFAULT_STYLE (
@@ -61,21 +60,21 @@ plugin.tx_yacy._CSS_DEFAULT_STYLE (
     color: #555555;
     font-family: Verdana,Arial,Helvetica,sans-serif;
 	}
-	
+
 	.t3begists h2 {
 	    font-size: 14px;
 	    margin: 2px 0 20px;
 	    font-weight: bold;
 	}
-	
+
 	.t3begists a {
 	    text-decoration: none;
 	}
-	
+
 	.t3begists_paginator {
 	    margin-bottom: 20px;
 	}
-	
+
 	.t3begists .paginator-page {
 	    background-color: #ededed;
 	    border: 1px solid #666;
@@ -83,7 +82,7 @@ plugin.tx_yacy._CSS_DEFAULT_STYLE (
 	    font-size: 80%;
 	    margin-left: -1px;
 	}
-	
+
 	.t3begists .paginator-page.active {
 	    background-color: #dcdcdc;
 	    font-weight: bold;
