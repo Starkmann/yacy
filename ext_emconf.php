@@ -16,15 +16,15 @@ $EM_CONF[$_EXTKEY] = array(
 	'category' => 'plugin',
 	'author' => 'Eike Starkmann',
 	'author_email' => 'eikestarkmann@posteo.de',
-	'state' => 'beta',
+	'state' => 'alpha',
 	'internal' => '',
 	'uploadfolder' => '0',
 	'createDirs' => '',
 	'clearCacheOnLoad' => 0,
-	'version' => '0.1.0',
+	'version' => '0.0.1',
 	'constraints' => array(
 		'depends' => array(
-            'typo3' => '6.2.0-7.99.99',
+			'typo3' => '6.2 - 8.7.99',
 		),
 		'conflicts' => array(
 		),
