@@ -1,14 +1,11 @@
 <?php
-namespace Yacy\Yacy\Domain\Model;
-
-
-use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
+namespace Eike\Yacy\Domain\Model;
 
 /***************************************************************
  *
  *  Copyright notice
  *
- *  (c) 2014 Eike Starkmann <eikestarkmann@web.de>
+ *  (c) 2018 Eike Starkmann <eike.starkmann@posteo.de>
  *
  *  All rights reserved
  *
@@ -32,360 +29,415 @@ use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 /**
  * Damand object for yacy search
  */
-class Demand extends \TYPO3\CMS\Extbase\DomainObject\AbstractValueObject {
+class Demand extends \TYPO3\CMS\Extbase\DomainObject\AbstractValueObject
+{
 
-	/**
-	 * host
-	 *
-	 * @var string
-	 */
-	protected $host = '';
+    /**
+     * @var string
+     */
+    protected $protocol = 'http';
 
-	/**
-	 * domain
-	 *
-	 * @var string
-	 */
-	protected $domain = '';
+    /**
+     * @var string
+     */
+    protected $interface = 'yacysearch.rss';
 
-	/**
-	 * query
-	 *
-	 * @var string
-	 */
-	protected $query = '';
+    /**
+     * domain
+     *
+     * @var string
+     */
+    protected $domain = '';
 
-	/**
-	 * startRecord
-	 *
-	 * @var integer
-	 */
-	protected $startRecord = 0;
+    /**
+     * query
+     *
+     * @var string
+     */
+    protected $query = '';
 
-	/**
-	 * maximumRecords
-	 *
-	 * @var integer
-	 */
-	protected $maximumRecords = 0;
+    /**
+     * startRecord
+     *
+     * @var int
+     */
+    protected $startRecord = 0;
 
-	/**
-	 * contentDom
-	 *
-	 * @var string
-	 */
-	protected $contentDom = '';
+    /**
+     * maximumRecords
+     *
+     * @var int
+     */
+    protected $maximumRecords = 10;
 
-	/**
-	 * resource
-	 *
-	 * @var string
-	 */
-	protected $resource = '';
+    /**
+     * contentDom
+     *
+     * @var string
+     */
+    protected $contentDom = '';
 
-	/**
-	 * urlMaskFilter
-	 *
-	 * @var string
-	 */
-	protected $urlMaskFilter = '';
+    /**
+     * resource
+     *
+     * @var string
+     */
+    protected $resource = '';
 
-	/**
-	 * preferMaskFilter
-	 *
-	 * @var string
-	 */
-	protected $preferMaskFilter = '';
+    /**
+     * urlMaskFilter
+     *
+     * @var string
+     */
+    protected $urlMaskFilter = '';
 
-	/**
-	 * verify
-	 *
-	 * @var string
-	 */
-	protected $verify = '';
+    /**
+     * preferMaskFilter
+     *
+     * @var string
+     */
+    protected $preferMaskFilter = '';
 
-	/**
-	 * language
-	 *
-	 * @var string
-	 */
-	protected $language = '';
+    /**
+     * verify
+     *
+     * @var string
+     */
+    protected $verify = '';
 
-	/**
-	 * port
-	 *
-	 * @var integer
-	 */
-	protected $port = 0;
-	
-	/**
-	 * The result page to reffer to
-	 * 
-	 * @var integer
-	 */
-	protected $resultPage = 0;
+    /**
+     * language
+     *
+     * @var string
+     */
+    protected $language = '';
 
-	/**
-	 * Returns the host
-	 *
-	 * @return string $host
-	 */
-	public function getHost() {
-		return $this->host;
-	}
+    /**
+     * port
+     *
+     * @var int
+     */
+    protected $port = 0;
 
-	/**
-	 * Sets the host
-	 *
-	 * @param string $host
-	 * @return void
-	 */
-	public function setHost($host) {
-		$this->host = $host;
-	}
+    /**
+     * The result page to reffer to
+     *
+     * @var int
+     */
+    protected $resultPage = 0;
 
-	/**
-	 * Returns the domain
-	 *
-	 * @return string $domain
-	 */
-	public function getDomain() {
-		return $this->domain;
-	}
+    /**
+     * Returns the domain
+     *
+     * @return string $domain
+     */
+    public function getDomain()
+    {
+        return $this->domain;
+    }
 
-	/**
-	 * Sets the domain
-	 *
-	 * @param string $domain
-	 * @return void
-	 */
-	public function setDomain($domain) {
-		$this->domain = $domain;
-	}
+    /**
+     * Sets the domain
+     *
+     * @param string $domain
+     */
+    public function setDomain($domain)
+    {
+        $this->domain = $domain;
+    }
 
-	/**
-	 * Returns the query
-	 *
-	 * @return string $query
-	 */
-	public function getQuery() {
-		return $this->query;
-	}
+    /**
+     * Returns the query
+     *
+     * @return string $query
+     */
+    public function getQuery()
+    {
+        return $this->query;
+    }
 
-	/**
-	 * Sets the query
-	 *
-	 * @param string $query
-	 * @return void
-	 */
-	public function setQuery($query) {
-		$this->query = $query;
-	}
+    /**
+     * Sets the query
+     *
+     * @param string $query
+     */
+    public function setQuery($query)
+    {
+        $this->query = $query;
+    }
 
-	/**
-	 * Returns the startRecord
-	 *
-	 * @return integer $startRecord
-	 */
-	public function getStartRecord() {
-		return $this->startRecord;
-	}
+    /**
+     * Returns the startRecord
+     *
+     * @return int $startRecord
+     */
+    public function getStartRecord()
+    {
+        return $this->startRecord;
+    }
 
-	/**
-	 * Sets the startRecord
-	 *
-	 * @param integer $startRecord
-	 * @return void
-	 */
-	public function setStartRecord($startRecord) {
-		$this->startRecord = $startRecord;
-	}
+    /**
+     * Sets the startRecord
+     *
+     * @param int $startRecord
+     */
+    public function setStartRecord($startRecord)
+    {
+        $this->startRecord = $startRecord;
+    }
 
-	/**
-	 * Returns the maximumRecords
-	 *
-	 * @return integer $maximumRecords
-	 */
-	public function getMaximumRecords() {
-		return $this->maximumRecords;
-	}
+    /**
+     * Returns the maximumRecords
+     *
+     * @return int $maximumRecords
+     */
+    public function getMaximumRecords()
+    {
+        return $this->maximumRecords;
+    }
 
-	/**
-	 * Sets the maximumRecords
-	 *
-	 * @param integer $maximumRecords
-	 * @return void
-	 */
-	public function setMaximumRecords($maximumRecords) {
-		$this->maximumRecords = $maximumRecords;
-	}
+    /**
+     * Sets the maximumRecords
+     *
+     * @param int $maximumRecords
+     */
+    public function setMaximumRecords($maximumRecords)
+    {
+        $this->maximumRecords = $maximumRecords;
+    }
 
-	/**
-	 * Returns the contentDom
-	 *
-	 * @return string $contentDom
-	 */
-	public function getContentDom() {
-		return $this->contentDom;
-	}
+    /**
+     * Returns the contentDom
+     *
+     * @return string $contentDom
+     */
+    public function getContentDom()
+    {
+        return $this->contentDom;
+    }
 
-	/**
-	 * Sets the contentDom
-	 *
-	 * @param string $contentDom
-	 * @return void
-	 */
-	public function setContentDom($contentDom) {
-		$this->contentDom = $contentDom;
-	}
+    /**
+     * Sets the contentDom
+     *
+     * @param string $contentDom
+     */
+    public function setContentDom($contentDom)
+    {
+        $this->contentDom = $contentDom;
+    }
 
-	/**
-	 * Returns the resource
-	 *
-	 * @return string $resource
-	 */
-	public function getResource() {
-		return $this->resource;
-	}
+    /**
+     * Returns the resource
+     *
+     * @return string $resource
+     */
+    public function getResource()
+    {
+        return $this->resource;
+    }
 
-	/**
-	 * Sets the resource
-	 *
-	 * @param string $resource
-	 * @return void
-	 */
-	public function setResource($resource) {
-		$this->resource = $resource;
-	}
+    /**
+     * Sets the resource
+     *
+     * @param string $resource
+     */
+    public function setResource($resource)
+    {
+        $this->resource = $resource;
+    }
 
-	/**
-	 * Returns the urlMaskFilter
-	 *
-	 * @return string $urlMaskFilter
-	 */
-	public function getUrlMaskFilter() {
-		return $this->urlMaskFilter;
-	}
+    /**
+     * Returns the urlMaskFilter
+     *
+     * @return string $urlMaskFilter
+     */
+    public function getUrlMaskFilter()
+    {
+        return $this->urlMaskFilter;
+    }
 
-	/**
-	 * Sets the urlMaskFilter
-	 *
-	 * @param string $urlMaskFilter
-	 * @return void
-	 */
-	public function setUrlMaskFilter($urlMaskFilter) {
-		$this->urlMaskFilter = $urlMaskFilter;
-	}
+    /**
+     * Sets the urlMaskFilter
+     *
+     * @param string $urlMaskFilter
+     */
+    public function setUrlMaskFilter($urlMaskFilter)
+    {
+        $this->urlMaskFilter = $urlMaskFilter;
+    }
 
-	/**
-	 * Returns the preferMaskFilter
-	 *
-	 * @return string $preferMaskFilter
-	 */
-	public function getPreferMaskFilter() {
-		return $this->preferMaskFilter;
-	}
+    /**
+     * Returns the preferMaskFilter
+     *
+     * @return string $preferMaskFilter
+     */
+    public function getPreferMaskFilter()
+    {
+        return $this->preferMaskFilter;
+    }
 
-	/**
-	 * Sets the preferMaskFilter
-	 *
-	 * @param string $preferMaskFilter
-	 * @return void
-	 */
-	public function setPreferMaskFilter($preferMaskFilter) {
-		$this->preferMaskFilter = $preferMaskFilter;
-	}
+    /**
+     * Sets the preferMaskFilter
+     *
+     * @param string $preferMaskFilter
+     */
+    public function setPreferMaskFilter($preferMaskFilter)
+    {
+        $this->preferMaskFilter = $preferMaskFilter;
+    }
 
-	/**
-	 * Returns the verify
-	 *
-	 * @return string $verify
-	 */
-	public function getVerify() {
-		return $this->verify;
-	}
+    /**
+     * Returns the verify
+     *
+     * @return string $verify
+     */
+    public function getVerify()
+    {
+        return $this->verify;
+    }
 
-	/**
-	 * Sets the verify
-	 *
-	 * @param string $verify
-	 * @return void
-	 */
-	public function setVerify($verify) {
-		$this->verify = $verify;
-	}
+    /**
+     * Sets the verify
+     *
+     * @param string $verify
+     */
+    public function setVerify($verify)
+    {
+        $this->verify = $verify;
+    }
 
-	/**
-	 * Returns the language
-	 *
-	 * @return string $language
-	 */
-	public function getLanguage() {
-		return $this->language;
-	}
+    /**
+     * Returns the language
+     *
+     * @return string $language
+     */
+    public function getLanguage()
+    {
+        return $this->language;
+    }
 
-	/**
-	 * Sets the language
-	 *
-	 * @param string $language
-	 * @return void
-	 */
-	public function setLanguage($language) {
-		$this->language = $language;
-	}
+    /**
+     * Sets the language
+     *
+     * @param string $language
+     */
+    public function setLanguage($language)
+    {
+        $this->language = $language;
+    }
 
-	/**
-	 * Returns the port
-	 *
-	 * @return integer $port
-	 */
-	public function getPort() {
-		return $this->port;
-	}
+    /**
+     * Returns the port
+     *
+     * @return int $port
+     */
+    public function getPort()
+    {
+        return $this->port;
+    }
 
-	/**
-	 * Sets the port
-	 *
-	 * @param integer $port
-	 * @return void
-	 */
-	public function setPort($port) {
-		$this->port = $port;
-	}
-	
-	
-	/*
-	 * No real reason for having this but typo3 needs it in some way
-	 */
-	/**
-	 * Returns the port
-	 *
-	 */
-	public function getUid() {
-	}
-	
-	/**
-	 * Sets the port
-	 *
-	 * @param integer $port
-	 * @return void
-	 */
-	public function setUid($port) {
-	}
-	
-	/**
-	 * 
-	 * @return integer
-	 */
-	public function getResultPage(){
-		return $this->resultPage;
-	}
-	
-	/**
-	 * 
-	 * @param integer $resultPage
-	 */
-	public function setResultPage($resultPage){
-		$this->resultPage = $resultPage;
-	}
+    /**
+     * Sets the port
+     *
+     * @param int $port
+     */
+    public function setPort($port)
+    {
+        $this->port = $port;
+    }
+
+    /*
+     * No real reason for having this but typo3 needs it in some way
+     */
+    /**
+     * Returns the port
+     */
+    public function getUid()
+    {
+    }
+
+    /**
+     * Sets the port
+     *
+     * @param int $port
+     */
+    public function setUid($port)
+    {
+    }
+
+    /**
+     * @return int
+     */
+    public function getResultPage()
+    {
+        return $this->resultPage;
+    }
+
+    /**
+     * @param int $resultPage
+     */
+    public function setResultPage($resultPage)
+    {
+        $this->resultPage = $resultPage;
+    }
+
+    /**
+     * @return string
+     */
+    public function getProtocol(): string
+    {
+        return $this->protocol;
+    }
+
+    /**
+     * @param string $protocol
+     */
+    public function setProtocol(string $protocol)
+    {
+        $this->protocol = $protocol;
+    }
+
+    /**
+     * @return string
+     */
+    public function getInterface(): string
+    {
+        return $this->interface;
+    }
+
+    /**
+     * @param string $interface
+     */
+    public function setInterface(string $interface)
+    {
+        $this->interface = $interface;
+    }
+
+    /**
+     * Builds the request url
+     *
+     * @return string
+     */
+    public function getRequestUrl()
+    {
+        $url =
+            $this->getProtocol() .
+            '://' .
+            $this->getDomain() .
+            ':' .
+            $this->getPort() .
+            '/' .
+            $this->getInterface() .
+            '?query=' .
+            $this->getQuery() .
+            '&maximumRecords=' .
+            $this->getMaximumRecords() .
+            '&startRecord=' .
+            $this->getStartRecord();
+        if ($this->contentDom !== '') {
+            $url .= '&contentdom=' . $this->contentDom;
+        }
+
+        return $url;
+    }
 }

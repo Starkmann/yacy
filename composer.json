@@ -1,20 +1,27 @@
 {
-	"name": "yacy/yacy",
+	"name": "eike/yacy",
 	"type": "typo3-cms-extension",
-	"description": "Yacy search integration for typo3",
+	"description": "Integrate yacy",
 	"license": [
 		"GPL-2.0+"
+	],
+	"keywords": [
+		"integration",
+		"yacy",
+		"search"
 	],
 	"support": {
 		"issues": "https://github.com/Starkmann/yacy/issues"
 	},
 	"require": {
-		"typo3/cms": "6.2 - 8.7.99",
-		"php": ">= 5.6 < 7.2"
+		"typo3/cms": "^7.6 | ^8.7"
+	},
+	"replace": {
+		"yacy": "self.version"
 	},
 	"autoload": {
 		"psr-4": {
-			"Yacy\\Yacy\\": "Classes"
+			"Eike\\Yacy\\": "Classes"
 		}
 	}
 }
