@@ -33,7 +33,7 @@ use Eike\Yacy\Domain\Model\Demand;
  */
 class AbstractSearchRepository implements SearchRepositoryInterface
 {
-    public function findDemanded(Demand $demand, $page = 1)
+    public function findDemanded(Demand $demand, $page = 1, $debug = 0)
     {
     }
 

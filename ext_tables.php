@@ -4,9 +4,9 @@ if (!defined('TYPO3_MODE')) {
 }
 
 \TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
-    'Eike.' . $_EXTKEY,
+    'Eike.Yacy',
     'Search',
     'Yacy'
 );
 
-\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addStaticFile($_EXTKEY, 'Configuration/TypoScript', 'Yacy Search');
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addStaticFile('yacy', 'Configuration/TypoScript', 'Yacy Search');
