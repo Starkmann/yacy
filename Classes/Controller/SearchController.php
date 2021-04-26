@@ -107,11 +107,11 @@ class SearchController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
 
         $extensionConfiguration = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(ExtensionConfiguration::class)
             ->get('yacy');
-        $result = $this->searchRepository->findDemanded($demand, $page, $extensionConfiguration['debug']['value']);
+        $result = $this->searchRepository->findDemanded($demand, $page, $extensionConfiguration['debug']);
 
-        $pagination = $this->buildPagination($demand->getMaximumRecords(), $page, $result['totalResults']);
+        $pagination = $this->buildPagination($result['totalResults'], $demand->getMaximumRecords(), $page);
 
-        if ($extensionConfiguration['debug']['value'] === '1') {
+        if ($extensionConfiguration['debug'] === '1') {
             $this->view->assign('query', $demand->getRequestUrl());
             $this->view->assign('debug', 1);
             //DebuggerUtility::var_dump($demand,'Demand');
@@ -126,12 +126,12 @@ class SearchController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
     }
 
     /**
+     * @param $resultsCount
      * @param int $itemsPerPage
      * @param int $page
-     * @param int $resultsCount
-     * @return int
+     * @return array
      */
-    protected function buildPagination($itemsPerPage = 10, $page = 1, $resultsCount)
+    protected function buildPagination($resultsCount, $itemsPerPage = 10, $page = 1)
     {
         $minPagination = 0;
         $maxPagination = 0;

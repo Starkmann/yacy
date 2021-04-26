@@ -33,5 +33,5 @@ use Eike\Yacy\Domain\Model\Demand;
  */
 interface SearchRepositoryInterface
 {
-    public function findDemanded(Demand $demand, $page =1);
+    public function findDemanded(Demand $demand, $page = 1, $debug = 0);
 }
