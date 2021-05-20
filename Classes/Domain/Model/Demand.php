@@ -153,7 +153,7 @@ class Demand extends \TYPO3\CMS\Extbase\DomainObject\AbstractValueObject
      */
     public function getQuery()
     {
-        return $this->query;
+        return preg_replace('/\s+/', '+', $this->query);;
     }
 
     /**
