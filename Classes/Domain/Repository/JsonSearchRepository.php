@@ -1,6 +1,10 @@
 <?php
 namespace Eike\Yacy\Domain\Repository;
 
+use TYPO3\CMS\Extbase\SignalSlot\Exception\InvalidSlotException;
+use TYPO3\CMS\Extbase\SignalSlot\Exception\InvalidSlotReturnException;
+use TYPO3\CMS\Core\Log\LogManager;
+use TYPO3\CMS\Core\Log\LogLevel;
 use Eike\Yacy\Domain\Model\Demand;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Object\ObjectManager;
@@ -42,8 +46,8 @@ class JsonSearchRepository extends AbstractSearchRepository
      * @param int $debug
      * @return mixed|void
      * @throws \TYPO3\CMS\Extbase\Object\Exception
-     * @throws \TYPO3\CMS\Extbase\SignalSlot\Exception\InvalidSlotException
-     * @throws \TYPO3\CMS\Extbase\SignalSlot\Exception\InvalidSlotReturnException
+     * @throws InvalidSlotException
+     * @throws InvalidSlotReturnException
      */
     public function findDemanded(Demand $demand, $page = 1, $debug = 0)
     {
@@ -51,7 +55,7 @@ class JsonSearchRepository extends AbstractSearchRepository
         try{
             $json = json_decode(file_get_contents($demand->getRequestUrl()), true);
         }catch(\Exception $exception){
-            GeneralUtility::devLog($exception->getMessage(),'yacy');
+            GeneralUtility::makeInstance(LogManager::class)->getLogger(__CLASS__)->log(LogLevel::INFO, $exception->getMessage(), '');
             if($debug === '1'){
                 throw $exception;
             }

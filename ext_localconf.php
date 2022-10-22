@@ -1,18 +1,20 @@
 <?php
-if (!defined('TYPO3_MODE')) {
+use TYPO3\CMS\Extbase\Utility\ExtensionUtility;
+use Eike\Yacy\Controller\SearchController;
+if (!defined('TYPO3')) {
     die('Access denied.');
 }
 
-\TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
-    'Eike.Yacy',
+ExtensionUtility::configurePlugin(
+    'Yacy',
     'Search',
     [
-        'Search' => 'index, search',
+        SearchController::class => 'index, search',
 
     ],
     // non-cacheable actions
     [
-        'Search' => 'search',
+        SearchController::class => 'search',
 
     ]
 );

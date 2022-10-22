@@ -1,6 +1,7 @@
 <?php
 namespace Eike\Yacy\Domain\Model;
 
+use TYPO3\CMS\Extbase\DomainObject\AbstractValueObject;
 /***************************************************************
  *
  *  Copyright notice
@@ -25,11 +26,10 @@ namespace Eike\Yacy\Domain\Model;
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
-
 /**
  * Damand object for yacy search
  */
-class Demand extends \TYPO3\CMS\Extbase\DomainObject\AbstractValueObject
+class Demand extends AbstractValueObject
 {
 
     /**

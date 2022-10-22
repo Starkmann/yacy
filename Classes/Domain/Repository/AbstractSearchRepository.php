@@ -37,7 +37,7 @@ class AbstractSearchRepository implements SearchRepositoryInterface
     {
     }
 
-    public function countAllRequested(\Eike\Yacy\Domain\Model\Demand $demand)
+    public function countAllRequested(Demand $demand)
     {
     }
 }

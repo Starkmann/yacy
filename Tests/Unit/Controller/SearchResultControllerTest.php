@@ -1,6 +1,7 @@
 <?php
 namespace Eike\Yacy\Tests\Unit\Controller;
 
+use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 /***************************************************************
  *  Copyright notice
  *
@@ -24,13 +25,12 @@ namespace Eike\Yacy\Tests\Unit\Controller;
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
-
 /**
  * Test case for class Eike\Yacy\Controller\SearchResultController.
  *
  * @author Eike Starkmann <eike.starkmann@posteo.de>
  */
-class SearchResultControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
+class SearchResultControllerTest extends UnitTestCase
 {
 
     /**
