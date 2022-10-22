@@ -2,6 +2,8 @@
 
 namespace Eike\Yacy\Tests\Unit\Domain\Model;
 
+use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
+use Eike\Yacy\Domain\Model\SearchResult;
 /***************************************************************
  *  Copyright notice
  *
@@ -25,7 +27,6 @@ namespace Eike\Yacy\Tests\Unit\Domain\Model;
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
-
 /**
  * Test case for class \Eike\Yacy\Domain\Model\SearchResult.
  *
@@ -34,7 +35,7 @@ namespace Eike\Yacy\Tests\Unit\Domain\Model;
  *
  * @author Eike Starkmann <eike.starkmann@posteo.de>
  */
-class SearchResultTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
+class SearchResultTest extends UnitTestCase
 {
     /**
      * @var \Eike\Yacy\Domain\Model\SearchResult
@@ -43,7 +44,7 @@ class SearchResultTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
 
     protected function setUp()
     {
-        $this->subject = new \Eike\Yacy\Domain\Model\SearchResult();
+        $this->subject = new SearchResult();
     }
 
     protected function tearDown()

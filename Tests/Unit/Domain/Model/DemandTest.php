@@ -2,6 +2,8 @@
 
 namespace Eike\Yacy\Tests\Unit\Domain\Model;
 
+use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
+use Eike\Yacy\Domain\Model\Demand;
 /***************************************************************
  *  Copyright notice
  *
@@ -25,7 +27,6 @@ namespace Eike\Yacy\Tests\Unit\Domain\Model;
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
-
 /**
  * Test case for class \Eike\Yacy\Domain\Model\Demand.
  *
@@ -34,16 +35,16 @@ namespace Eike\Yacy\Tests\Unit\Domain\Model;
  *
  * @author Eike Starkmann <eike.starkmann@posteo.de>
  */
-class DemandTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
+class DemandTest extends UnitTestCase
 {
     /**
-     * @var \Eike\Yacy\Domain\Model\Demand
+     * @var Demand
      */
     protected $subject = null;
 
     protected function setUp()
     {
-        $this->subject = new \Eike\Yacy\Domain\Model\Demand();
+        $this->subject = new Demand();
     }
 
     protected function tearDown()

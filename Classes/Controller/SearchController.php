@@ -1,6 +1,11 @@
 <?php
 namespace Eike\Yacy\Controller;
 
+use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
+use Eike\Yacy\Domain\Repository\SearchRepositoryInterface;
+use TYPO3\CMS\Extbase\Property\TypeConverter\PersistentObjectConverter;
+use Psr\Http\Message\ResponseInterface;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 use Eike\Yacy\Domain\Model\Demand;
 use Eike\Yacy\Factory\SearchRepositoryFactory;
 use TYPO3\CMS\Core\Configuration\ExtensionConfiguration;
@@ -33,13 +38,13 @@ use TYPO3\CMS\Core\Configuration\ExtensionConfiguration;
 /**
  * SearchController
  */
-class SearchController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
+class SearchController extends ActionController
 {
 
     /**
      * searchResultRepository
      *
-     * @var \Eike\Yacy\Domain\Repository\SearchRepositoryInterface
+     * @var SearchRepositoryInterface
      */
     protected $searchRepository = null;
 
@@ -52,7 +57,7 @@ class SearchController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
         $itemDemandConfiguration
         ->setTypeConverterOption(
                 'TYPO3\CMS\Extbase\Property\TypeConverter\PersistentObjectConverter',
-                \TYPO3\CMS\Extbase\Property\TypeConverter\PersistentObjectConverter::CONFIGURATION_CREATION_ALLOWED,
+                PersistentObjectConverter::CONFIGURATION_CREATION_ALLOWED,
                 true
         );
     }
@@ -60,7 +65,7 @@ class SearchController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
     /**
      * action index
      */
-    public function indexAction()
+    public function indexAction(): ResponseInterface
     {
         /* @var $demand \Eike\Yacy\Domain\Model\Demand */
 
@@ -77,15 +82,16 @@ class SearchController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
         }
         $this->view->assign('demand', $demand);
         $this->view->assign('searchConfiguration', json_encode($this->settings));
+        return $this->htmlResponse();
 
     }
 
     /**
      * Search Action
-     * @param \Eike\Yacy\Domain\Model\Demand $demand
+     * @param Demand $demand
      * @param int $page
      */
-    public function searchAction(Demand $demand, $page = 1)
+    public function searchAction(Demand $demand, $page = 1): ResponseInterface
     {
         if ($this->settings['domain']&&$this->settings['port']) {
             $demand->setDomain($this->settings['domain']);
@@ -105,7 +111,7 @@ class SearchController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
             $demand->setQuery($demand->getQuery() . '+collection' . ':' . $this->settings['collection']);
         }
 
-        $extensionConfiguration = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(ExtensionConfiguration::class)
+        $extensionConfiguration = GeneralUtility::makeInstance(ExtensionConfiguration::class)
             ->get('yacy');
         $result = $this->searchRepository->findDemanded($demand, $page, $extensionConfiguration['debug']);
 
@@ -123,6 +129,7 @@ class SearchController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
         $this->view->assign('resultsCount', $result['totalResults']);
         $this->view->assign('navigation', $result['navigation']);
         $this->view->assign('searchConfiguration', json_encode($this->settings));
+        return $this->htmlResponse();
     }
 
     /**
