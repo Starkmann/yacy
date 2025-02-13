@@ -141,7 +141,7 @@ class Demand extends AbstractValueObject
      *
      * @param string $domain
      */
-    public function setDomain($domain)
+    public function setDomain($domain): void
     {
         $this->domain = $domain;
     }
@@ -161,7 +161,7 @@ class Demand extends AbstractValueObject
      *
      * @param string $query
      */
-    public function setQuery($query)
+    public function setQuery($query): void
     {
         $this->query = $query;
     }
@@ -181,7 +181,7 @@ class Demand extends AbstractValueObject
      *
      * @param int $startRecord
      */
-    public function setStartRecord($startRecord)
+    public function setStartRecord($startRecord): void
     {
         $this->startRecord = $startRecord;
     }
@@ -201,7 +201,7 @@ class Demand extends AbstractValueObject
      *
      * @param int $maximumRecords
      */
-    public function setMaximumRecords($maximumRecords)
+    public function setMaximumRecords($maximumRecords): void
     {
         $this->maximumRecords = $maximumRecords;
     }
@@ -221,7 +221,7 @@ class Demand extends AbstractValueObject
      *
      * @param string $contentDom
      */
-    public function setContentDom($contentDom)
+    public function setContentDom($contentDom): void
     {
         $this->contentDom = $contentDom;
     }
@@ -241,7 +241,7 @@ class Demand extends AbstractValueObject
      *
      * @param string $resource
      */
-    public function setResource($resource)
+    public function setResource($resource): void
     {
         $this->resource = $resource;
     }
@@ -261,7 +261,7 @@ class Demand extends AbstractValueObject
      *
      * @param string $urlMaskFilter
      */
-    public function setUrlMaskFilter($urlMaskFilter)
+    public function setUrlMaskFilter($urlMaskFilter): void
     {
         $this->urlMaskFilter = $urlMaskFilter;
     }
@@ -281,7 +281,7 @@ class Demand extends AbstractValueObject
      *
      * @param string $preferMaskFilter
      */
-    public function setPreferMaskFilter($preferMaskFilter)
+    public function setPreferMaskFilter($preferMaskFilter): void
     {
         $this->preferMaskFilter = $preferMaskFilter;
     }
@@ -301,7 +301,7 @@ class Demand extends AbstractValueObject
      *
      * @param string $verify
      */
-    public function setVerify($verify)
+    public function setVerify($verify): void
     {
         $this->verify = $verify;
     }
@@ -321,7 +321,7 @@ class Demand extends AbstractValueObject
      *
      * @param string $language
      */
-    public function setLanguage($language)
+    public function setLanguage($language): void
     {
         $this->language = $language;
     }
@@ -341,7 +341,7 @@ class Demand extends AbstractValueObject
      *
      * @param int $port
      */
-    public function setPort($port)
+    public function setPort($port): void
     {
         $this->port = $port;
     }
@@ -357,7 +357,7 @@ class Demand extends AbstractValueObject
     /**
      * @param int $resultPage
      */
-    public function setResultPage($resultPage)
+    public function setResultPage($resultPage): void
     {
         $this->resultPage = $resultPage;
     }
@@ -373,7 +373,7 @@ class Demand extends AbstractValueObject
     /**
      * @param string $protocol
      */
-    public function setProtocol(string $protocol)
+    public function setProtocol(string $protocol): void
     {
         $this->protocol = $protocol;
     }
@@ -389,7 +389,7 @@ class Demand extends AbstractValueObject
     /**
      * @param string $interface
      */
-    public function setInterface(string $interface)
+    public function setInterface(string $interface): void
     {
         $this->interface = $interface;
     }

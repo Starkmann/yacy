@@ -55,7 +55,7 @@ class SearchResultTest extends UnitTestCase
     /**
      * @test
      */
-    public function getLinkReturnsInitialValueForString()
+    public function getLinkReturnsInitialValueForString(): void
     {
         $this->assertSame(
             '',
@@ -66,7 +66,7 @@ class SearchResultTest extends UnitTestCase
     /**
      * @test
      */
-    public function setLinkForStringSetsLink()
+    public function setLinkForStringSetsLink(): void
     {
         $this->subject->setLink('Conceived at T3CON10');
 
@@ -80,7 +80,7 @@ class SearchResultTest extends UnitTestCase
     /**
      * @test
      */
-    public function getHostReturnsInitialValueForString()
+    public function getHostReturnsInitialValueForString(): void
     {
         $this->assertSame(
             '',
@@ -91,7 +91,7 @@ class SearchResultTest extends UnitTestCase
     /**
      * @test
      */
-    public function setHostForStringSetsHost()
+    public function setHostForStringSetsHost(): void
     {
         $this->subject->setHost('Conceived at T3CON10');
 
@@ -105,7 +105,7 @@ class SearchResultTest extends UnitTestCase
     /**
      * @test
      */
-    public function getPathReturnsInitialValueForString()
+    public function getPathReturnsInitialValueForString(): void
     {
         $this->assertSame(
             '',
@@ -116,7 +116,7 @@ class SearchResultTest extends UnitTestCase
     /**
      * @test
      */
-    public function setPathForStringSetsPath()
+    public function setPathForStringSetsPath(): void
     {
         $this->subject->setPath('Conceived at T3CON10');
 
@@ -130,7 +130,7 @@ class SearchResultTest extends UnitTestCase
     /**
      * @test
      */
-    public function getFileReturnsInitialValueForString()
+    public function getFileReturnsInitialValueForString(): void
     {
         $this->assertSame(
             '',
@@ -141,7 +141,7 @@ class SearchResultTest extends UnitTestCase
     /**
      * @test
      */
-    public function setFileForStringSetsFile()
+    public function setFileForStringSetsFile(): void
     {
         $this->subject->setFile('Conceived at T3CON10');
 
@@ -155,7 +155,7 @@ class SearchResultTest extends UnitTestCase
     /**
      * @test
      */
-    public function getDescriptionReturnsInitialValueForString()
+    public function getDescriptionReturnsInitialValueForString(): void
     {
         $this->assertSame(
             '',
@@ -166,7 +166,7 @@ class SearchResultTest extends UnitTestCase
     /**
      * @test
      */
-    public function setDescriptionForStringSetsDescription()
+    public function setDescriptionForStringSetsDescription(): void
     {
         $this->subject->setDescription('Conceived at T3CON10');
 
@@ -180,7 +180,7 @@ class SearchResultTest extends UnitTestCase
     /**
      * @test
      */
-    public function getCreatorReturnsInitialValueForString()
+    public function getCreatorReturnsInitialValueForString(): void
     {
         $this->assertSame(
             '',
@@ -191,7 +191,7 @@ class SearchResultTest extends UnitTestCase
     /**
      * @test
      */
-    public function setCreatorForStringSetsCreator()
+    public function setCreatorForStringSetsCreator(): void
     {
         $this->subject->setCreator('Conceived at T3CON10');
 
@@ -205,7 +205,7 @@ class SearchResultTest extends UnitTestCase
     /**
      * @test
      */
-    public function getPubDateReturnsInitialValueForString()
+    public function getPubDateReturnsInitialValueForString(): void
     {
         $this->assertSame(
             '',
@@ -216,7 +216,7 @@ class SearchResultTest extends UnitTestCase
     /**
      * @test
      */
-    public function setPubDateForStringSetsPubDate()
+    public function setPubDateForStringSetsPubDate(): void
     {
         $this->subject->setPubDate('Conceived at T3CON10');
 
@@ -230,7 +230,7 @@ class SearchResultTest extends UnitTestCase
     /**
      * @test
      */
-    public function getLatitudeReturnsInitialValueForString()
+    public function getLatitudeReturnsInitialValueForString(): void
     {
         $this->assertSame(
             '',
@@ -241,7 +241,7 @@ class SearchResultTest extends UnitTestCase
     /**
      * @test
      */
-    public function setLatitudeForStringSetsLatitude()
+    public function setLatitudeForStringSetsLatitude(): void
     {
         $this->subject->setLatitude('Conceived at T3CON10');
 
@@ -255,7 +255,7 @@ class SearchResultTest extends UnitTestCase
     /**
      * @test
      */
-    public function getLongitudeReturnsInitialValueForString()
+    public function getLongitudeReturnsInitialValueForString(): void
     {
         $this->assertSame(
             '',
@@ -266,7 +266,7 @@ class SearchResultTest extends UnitTestCase
     /**
      * @test
      */
-    public function setLongitudeForStringSetsLongitude()
+    public function setLongitudeForStringSetsLongitude(): void
     {
         $this->subject->setLongitude('Conceived at T3CON10');
 
@@ -280,7 +280,7 @@ class SearchResultTest extends UnitTestCase
     /**
      * @test
      */
-    public function getSizeReturnsInitialValueForString()
+    public function getSizeReturnsInitialValueForString(): void
     {
         $this->assertSame(
             '',
@@ -291,7 +291,7 @@ class SearchResultTest extends UnitTestCase
     /**
      * @test
      */
-    public function setSizeForStringSetsSize()
+    public function setSizeForStringSetsSize(): void
     {
         $this->subject->setSize('Conceived at T3CON10');
 
@@ -305,7 +305,7 @@ class SearchResultTest extends UnitTestCase
     /**
      * @test
      */
-    public function getTitleReturnsInitialValueForString()
+    public function getTitleReturnsInitialValueForString(): void
     {
         $this->assertSame(
             '',
@@ -316,7 +316,7 @@ class SearchResultTest extends UnitTestCase
     /**
      * @test
      */
-    public function setTitleForStringSetsTitle()
+    public function setTitleForStringSetsTitle(): void
     {
         $this->subject->setTitle('Conceived at T3CON10');
 
@@ -330,7 +330,7 @@ class SearchResultTest extends UnitTestCase
     /**
      * @test
      */
-    public function getSubjectReturnsInitialValueForString()
+    public function getSubjectReturnsInitialValueForString(): void
     {
         $this->assertSame(
             '',
@@ -341,7 +341,7 @@ class SearchResultTest extends UnitTestCase
     /**
      * @test
      */
-    public function setSubjectForStringSetsSubject()
+    public function setSubjectForStringSetsSubject(): void
     {
         $this->subject->setSubject('Conceived at T3CON10');
 
@@ -355,7 +355,7 @@ class SearchResultTest extends UnitTestCase
     /**
      * @test
      */
-    public function getGuidReturnsInitialValueForString()
+    public function getGuidReturnsInitialValueForString(): void
     {
         $this->assertSame(
             '',
@@ -366,7 +366,7 @@ class SearchResultTest extends UnitTestCase
     /**
      * @test
      */
-    public function setGuidForStringSetsGuid()
+    public function setGuidForStringSetsGuid(): void
     {
         $this->subject->setGuid('Conceived at T3CON10');
 

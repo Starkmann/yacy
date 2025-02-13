@@ -50,7 +50,7 @@ class SearchController extends ActionController
 
     /**
      */
-    public function initializeSearchAction()
+    public function initializeSearchAction(): void
     {
         $itemDemandConfiguration = $this->arguments['demand']->getPropertyMappingConfiguration();
         $itemDemandConfiguration->allowAllProperties();

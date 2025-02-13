@@ -37,7 +37,7 @@ class SearchRepositoryFactory
      */
     protected $objectManager;
 
-    public function injectObjectManager(ObjectManager $objectManager)
+    public function __construct(\TYPO3\CMS\Extbase\Object\ObjectManager $objectManager)
     {
         $this->objectManager = $objectManager;
     }

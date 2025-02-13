@@ -55,7 +55,7 @@ class DemandTest extends UnitTestCase
     /**
      * @test
      */
-    public function getRequestUrlReturnsInitialValueForString()
+    public function getRequestUrlReturnsInitialValueForString(): void
     {
         $this->assertSame(
             '',
@@ -66,7 +66,7 @@ class DemandTest extends UnitTestCase
     /**
      * @test
      */
-    public function setRequestUrlForStringSetsRequestUrl()
+    public function setRequestUrlForStringSetsRequestUrl(): void
     {
         $this->subject->setRequestUrl('Conceived at T3CON10');
 
@@ -80,7 +80,7 @@ class DemandTest extends UnitTestCase
     /**
      * @test
      */
-    public function getHostReturnsInitialValueForString()
+    public function getHostReturnsInitialValueForString(): void
     {
         $this->assertSame(
             '',
@@ -91,7 +91,7 @@ class DemandTest extends UnitTestCase
     /**
      * @test
      */
-    public function setHostForStringSetsHost()
+    public function setHostForStringSetsHost(): void
     {
         $this->subject->setHost('Conceived at T3CON10');
 
@@ -105,7 +105,7 @@ class DemandTest extends UnitTestCase
     /**
      * @test
      */
-    public function getDomainReturnsInitialValueForString()
+    public function getDomainReturnsInitialValueForString(): void
     {
         $this->assertSame(
             '',
@@ -116,7 +116,7 @@ class DemandTest extends UnitTestCase
     /**
      * @test
      */
-    public function setDomainForStringSetsDomain()
+    public function setDomainForStringSetsDomain(): void
     {
         $this->subject->setDomain('Conceived at T3CON10');
 
@@ -130,7 +130,7 @@ class DemandTest extends UnitTestCase
     /**
      * @test
      */
-    public function getQueryReturnsInitialValueForString()
+    public function getQueryReturnsInitialValueForString(): void
     {
         $this->assertSame(
             '',
@@ -141,7 +141,7 @@ class DemandTest extends UnitTestCase
     /**
      * @test
      */
-    public function setQueryForStringSetsQuery()
+    public function setQueryForStringSetsQuery(): void
     {
         $this->subject->setQuery('Conceived at T3CON10');
 
@@ -155,7 +155,7 @@ class DemandTest extends UnitTestCase
     /**
      * @test
      */
-    public function getStartRecordReturnsInitialValueForInteger()
+    public function getStartRecordReturnsInitialValueForInteger(): void
     {
         $this->assertSame(
             0,
@@ -166,7 +166,7 @@ class DemandTest extends UnitTestCase
     /**
      * @test
      */
-    public function setStartRecordForIntegerSetsStartRecord()
+    public function setStartRecordForIntegerSetsStartRecord(): void
     {
         $this->subject->setStartRecord(12);
 
@@ -180,7 +180,7 @@ class DemandTest extends UnitTestCase
     /**
      * @test
      */
-    public function getMaximumRecordsReturnsInitialValueForInteger()
+    public function getMaximumRecordsReturnsInitialValueForInteger(): void
     {
         $this->assertSame(
             0,
@@ -191,7 +191,7 @@ class DemandTest extends UnitTestCase
     /**
      * @test
      */
-    public function setMaximumRecordsForIntegerSetsMaximumRecords()
+    public function setMaximumRecordsForIntegerSetsMaximumRecords(): void
     {
         $this->subject->setMaximumRecords(12);
 
@@ -205,7 +205,7 @@ class DemandTest extends UnitTestCase
     /**
      * @test
      */
-    public function getContentDomReturnsInitialValueForString()
+    public function getContentDomReturnsInitialValueForString(): void
     {
         $this->assertSame(
             '',
@@ -216,7 +216,7 @@ class DemandTest extends UnitTestCase
     /**
      * @test
      */
-    public function setContentDomForStringSetsContentDom()
+    public function setContentDomForStringSetsContentDom(): void
     {
         $this->subject->setContentDom('Conceived at T3CON10');
 
@@ -230,7 +230,7 @@ class DemandTest extends UnitTestCase
     /**
      * @test
      */
-    public function getResourceReturnsInitialValueForString()
+    public function getResourceReturnsInitialValueForString(): void
     {
         $this->assertSame(
             '',
@@ -241,7 +241,7 @@ class DemandTest extends UnitTestCase
     /**
      * @test
      */
-    public function setResourceForStringSetsResource()
+    public function setResourceForStringSetsResource(): void
     {
         $this->subject->setResource('Conceived at T3CON10');
 
@@ -255,7 +255,7 @@ class DemandTest extends UnitTestCase
     /**
      * @test
      */
-    public function getUrlMaskFilterReturnsInitialValueForString()
+    public function getUrlMaskFilterReturnsInitialValueForString(): void
     {
         $this->assertSame(
             '',
@@ -266,7 +266,7 @@ class DemandTest extends UnitTestCase
     /**
      * @test
      */
-    public function setUrlMaskFilterForStringSetsUrlMaskFilter()
+    public function setUrlMaskFilterForStringSetsUrlMaskFilter(): void
     {
         $this->subject->setUrlMaskFilter('Conceived at T3CON10');
 
@@ -280,7 +280,7 @@ class DemandTest extends UnitTestCase
     /**
      * @test
      */
-    public function getPreferMaskFilterReturnsInitialValueForString()
+    public function getPreferMaskFilterReturnsInitialValueForString(): void
     {
         $this->assertSame(
             '',
@@ -291,7 +291,7 @@ class DemandTest extends UnitTestCase
     /**
      * @test
      */
-    public function setPreferMaskFilterForStringSetsPreferMaskFilter()
+    public function setPreferMaskFilterForStringSetsPreferMaskFilter(): void
     {
         $this->subject->setPreferMaskFilter('Conceived at T3CON10');
 
@@ -305,7 +305,7 @@ class DemandTest extends UnitTestCase
     /**
      * @test
      */
-    public function getVerifyReturnsInitialValueForString()
+    public function getVerifyReturnsInitialValueForString(): void
     {
         $this->assertSame(
             '',
@@ -316,7 +316,7 @@ class DemandTest extends UnitTestCase
     /**
      * @test
      */
-    public function setVerifyForStringSetsVerify()
+    public function setVerifyForStringSetsVerify(): void
     {
         $this->subject->setVerify('Conceived at T3CON10');
 
@@ -330,7 +330,7 @@ class DemandTest extends UnitTestCase
     /**
      * @test
      */
-    public function getLanguageReturnsInitialValueForString()
+    public function getLanguageReturnsInitialValueForString(): void
     {
         $this->assertSame(
             '',
@@ -341,7 +341,7 @@ class DemandTest extends UnitTestCase
     /**
      * @test
      */
-    public function setLanguageForStringSetsLanguage()
+    public function setLanguageForStringSetsLanguage(): void
     {
         $this->subject->setLanguage('Conceived at T3CON10');
 
@@ -355,7 +355,7 @@ class DemandTest extends UnitTestCase
     /**
      * @test
      */
-    public function getPortReturnsInitialValueForInteger()
+    public function getPortReturnsInitialValueForInteger(): void
     {
         $this->assertSame(
             0,
@@ -366,7 +366,7 @@ class DemandTest extends UnitTestCase
     /**
      * @test
      */
-    public function setPortForIntegerSetsPort()
+    public function setPortForIntegerSetsPort(): void
     {
         $this->subject->setPort(12);
 
