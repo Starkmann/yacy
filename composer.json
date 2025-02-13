@@ -1,7 +1,7 @@
 {
 	"name": "eike/yacy",
 	"type": "typo3-cms-extension",
-	"description": "Integrate yacy",
+	"description": "Integrate yacy search to TYPO3",
 	"license": [
 		"GPL-2.0+"
 	],
