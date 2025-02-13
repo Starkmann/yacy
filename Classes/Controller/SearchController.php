@@ -69,7 +69,7 @@ class SearchController extends ActionController
     {
         /* @var $demand \Eike\Yacy\Domain\Model\Demand */
 
-        $demand = $this->objectManager->get('Eike\Yacy\Domain\Model\Demand');
+        $demand = GeneralUtility::makeInstance (Demand::class);
 
         if ($this->settings['domain']&&$this->settings['port']) {
             $demand->setDomain($this->settings['domain']);
@@ -100,7 +100,7 @@ class SearchController extends ActionController
             $demand->setProtocol($this->settings['protocol']);
         }
         /** @var SearchRepositoryFactory $searchRepositoryFactory */
-        $searchRepositoryFactory = $this->objectManager->get(SearchRepositoryFactory::class);
+        $searchRepositoryFactory = GeneralUtility::makeInstance(SearchRepositoryFactory::class);
         $this->searchRepository = $searchRepositoryFactory->createSearchRepository($demand->getInterface());
 
         $demand->setMaximumRecords($this->settings['itemsPerPage']);

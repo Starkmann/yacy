@@ -45,9 +45,7 @@ class JsonSearchRepository extends AbstractSearchRepository
      * @param int $page
      * @param int $debug
      * @return mixed|void
-     * @throws \TYPO3\CMS\Extbase\Object\Exception
-     * @throws InvalidSlotException
-     * @throws InvalidSlotReturnException
+     * @throws \Exception
      */
     public function findDemanded(Demand $demand, $page = 1, $debug = 0)
     {
@@ -61,10 +59,14 @@ class JsonSearchRepository extends AbstractSearchRepository
             }
         }
 
+        /*todo this needs to be refactored to events
+        * https://docs.typo3.org/c/typo3/cms-core/main/en-us/Changelog/10.4/Deprecation-90625-ExtbaseSignalSlotDispatcher.html
         $objectManager = GeneralUtility::makeInstance(ObjectManager::class);
-        /**@var \TYPO3\CMS\Extbase\SignalSlot\Dispatcher $signalSlotDispatcher **/
+
         $signalSlotDispatcher = $objectManager->get(Dispatcher::class);
         $signalSlotDispatcher->dispatch(__CLASS__, 'beforeReturnResults', [$demand, $page, &$json]);
+        */
         return $json['channels'][0];
+
     }
 }
