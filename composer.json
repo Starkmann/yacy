@@ -29,7 +29,7 @@
 			"extension-key": "yacy"
 		},
 		"branch-alias":{
-			"dev-main": "5.1.x-dev"
+			"dev-master": "5.1.x-dev"
 		}
    }
 }
