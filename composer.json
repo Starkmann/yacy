@@ -14,7 +14,7 @@
 		"issues": "https://github.com/Starkmann/yacy/issues"
 	},
 	"require": {
-		"typo3/cms-core": "^12.4"
+		"typo3/cms-core": "^11.5 || ^12.4"
 	},
 	"replace": {
 		"typo3-ter/yacy": "self.version"
@@ -29,7 +29,7 @@
 			"extension-key": "yacy"
 		},
 		"branch-alias":{
-			"dev-main": "5.0.x-dev"
+			"dev-main": "5.1.x-dev"
 		}
    }
 }
