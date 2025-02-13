@@ -28,6 +28,7 @@ namespace Eike\Yacy\Factory;
 
 use Eike\Yacy\Domain\Repository\JsonSearchRepository;
 use Eike\Yacy\Domain\Repository\RssSearchRepository;
+use Psr\EventDispatcher\EventDispatcherInterface;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Object\ObjectManager;
 
@@ -43,7 +44,8 @@ class SearchRepositoryFactory
             return GeneralUtility::makeInstance(RssSearchRepository::class);
         }
         if ($interfaceName === 'yacysearch.json') {
-            return GeneralUtility::makeInstance(JsonSearchRepository::class);
+            $eventDispatcher = GeneralUtility::makeInstance(EventDispatcherInterface::class);
+            return GeneralUtility::makeInstance(JsonSearchRepository::class,$eventDispatcher);
         }
         return null;
     }

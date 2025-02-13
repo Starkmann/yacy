@@ -1,6 +1,8 @@
 <?php
 namespace Eike\Yacy\Domain\Repository;
 
+use Eike\Yacy\Event\BeforeReturnResultsEvent;
+use Psr\EventDispatcher\EventDispatcherInterface;
 use TYPO3\CMS\Extbase\SignalSlot\Exception\InvalidSlotException;
 use TYPO3\CMS\Extbase\SignalSlot\Exception\InvalidSlotReturnException;
 use TYPO3\CMS\Core\Log\LogManager;
@@ -40,6 +42,10 @@ use TYPO3\CMS\Extbase\SignalSlot\Dispatcher;
  */
 class JsonSearchRepository extends AbstractSearchRepository
 {
+    public function __construct(
+        private readonly EventDispatcherInterface $eventDispatcher,
+    ) {}
+
     /**
      * @param Demand $demand
      * @param int $page
@@ -51,22 +57,20 @@ class JsonSearchRepository extends AbstractSearchRepository
     {
 
         try{
-            $json = json_decode(file_get_contents($demand->getRequestUrl()), true);
+            /** @var BeforeReturnResultsEvent $event */
+            $event = $this->eventDispatcher->dispatch(
+                new BeforeReturnResultsEvent(
+                    $demand,
+                    $page,
+                    json_decode(file_get_contents($demand->getRequestUrl()), true)
+                ),
+            );
+            return $event->getJson()['channels'][0];
         }catch(\Exception $exception){
             GeneralUtility::makeInstance(LogManager::class)->getLogger(__CLASS__)->log(LogLevel::INFO, $exception->getMessage(), '');
             if($debug === '1'){
                 throw $exception;
             }
         }
-
-        /*todo this needs to be refactored to events
-        * https://docs.typo3.org/c/typo3/cms-core/main/en-us/Changelog/10.4/Deprecation-90625-ExtbaseSignalSlotDispatcher.html
-        $objectManager = GeneralUtility::makeInstance(ObjectManager::class);
-
-        $signalSlotDispatcher = $objectManager->get(Dispatcher::class);
-        $signalSlotDispatcher->dispatch(__CLASS__, 'beforeReturnResults', [$demand, $page, &$json]);
-        */
-        return $json['channels'][0];
-
     }
 }
