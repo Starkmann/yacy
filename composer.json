@@ -25,8 +25,11 @@
 		}
 	},
 	"extra": {
-      "typo3/cms": {
-         "extension-key": "yacy"
-      }
+		"typo3/cms": {
+			"extension-key": "yacy"
+		},
+		"branch-alias":{
+			"dev-main": "5.0.x-dev"
+		}
    }
 }
