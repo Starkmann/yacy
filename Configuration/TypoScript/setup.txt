@@ -1,9 +1,19 @@
 
 plugin.tx_yacy {
     view {
-        templateRootPath = {$plugin.tx_yacy.view.templateRootPath}
-        partialRootPath = {$plugin.tx_yacy.view.partialRootPath}
-        layoutRootPath = {$plugin.tx_yacy.view.layoutRootPath}
+        templateRootPaths {
+        			0 = EXT:yacy/Resources/Private/Templates/
+        			1 = {$plugin.tx_yacy.view.templateRootPaths}
+        }
+        partialRootPaths {
+            0 = EXT:yacy/Resources/Private/Partials/
+            1 = {$plugin.tx_yacy.view.partialRootPath}
+        }
+
+        layoutRootPaths {
+            0 = EXT:yacy/Resources/Private/Layouts/
+            1 = {$plugin.tx_yacy.view.layoutRootPath}
+        }
     }
     persistence {
         storagePid = {$plugin.tx_yacy.persistence.storagePid}
